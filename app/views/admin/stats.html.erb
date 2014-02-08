@@ -1,0 +1,19 @@
+<div id="admin_stats">
+<h1>Stats for <%=Date.today.year%></h1>
+	
+	<h2>Tickets</h2>
+	<table>
+	<tr><td>Name</td><td>adults</td><td>students</td><td>kids</td></tr>
+	
+	<% @signups.keys.each do |k| %>
+	<tr><th colspan="4"><%=Area.find(k).name%></th></tr>
+	<% @signups[k].each do |s| %>
+	<tr><td><%= s.volunteer.name %></td><td><%= s.tix_ad %></td><td><%= s.tix_st %></td><td><%= s.tix_ch %></td></tr>
+	<% end %>
+	<tr><td>Total</td><td><%= @signups[1].sum{|t| t.tix_ad||0}  %></td><td><%= @signups[1].sum{|t| t.tix_st||0}  %></td><td><%= @signups[1].sum{|t| t.tix_ch||0} %></td></tr>
+	
+	
+	<% end %>
+	
+	</table>
+</div>

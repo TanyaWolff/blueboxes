@@ -1,0 +1,105 @@
+
+<table>
+  <tr class="toprow">
+    <th/>
+     
+     <th>Last Name</th>
+    <th>First Name</th>
+     <th>SignedUp</th>
+     <th>Area</th>
+    <th>Hours</th>
+     <th>First BS year</th>
+    <th>First key year</th>
+     <th>Old Hat</th>
+     <% if !screen then %>
+     <th>Tix Adult</th>
+     <th>Tix Student (13+)</th>
+     <th>Tix Child (12-)</th>
+     <% end %>
+   <th>Email</th>
+    <th>Phones</th>
+   
+    <th>Address</th>
+    <% if screen then %>
+     <th>Profile</th>
+     <th />
+     <% end %>
+   
+  </tr>
+
+<% @volunteers.each do |volunteer| %>
+    
+    <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
+    
+    <td  >
+     <% if screen then %>
+    
+    <%=thumb(volunteer)%> 
+    <% end %>
+    </td>
+    <!--<img src="<%=url_for(:controller => 'gallery', :action=>'picture', :id=>'1') %>"/>%= get_icon(volunteer, screen) %-->
+    
+    <td><%=h volunteer.last_name %></td>
+    <td><%=h volunteer.first_name %></td>
+     <td><%= ok_disp(signed_up(volunteer)) %></td>
+     <td><%=h volunteer.area.name if volunteer.area %></td>
+    <td><%=h volunteer.hours %></td>
+    <td><%=h volunteer.first_year_bs %></td>
+    <td><%=h volunteer.first_year_key %></td>
+    <td><%= ok_disp(volunteer.old_hat) %></td>
+     <% if !screen then %>
+    <td><%=h volunteer.tickets %></td>
+    <td><%=h volunteer.tix_students %></td>
+    <td><%=h volunteer.tix_kids %></td>
+    <% end %>
+    <% if volunteer.share ||!screen then%>
+    
+    <td><%=h volunteer.email %></td>
+     <td><%=h volunteer.phone%>
+      <%=h volunteer.cell %></td>
+      <td><%=h volunteer.address %></td>
+		<% if screen then %>
+		<td><%=h truncate( volunteer.profile, :length =>20) %></td>
+		<% end %>
+       <% else %>
+     <td colspan="4"/>
+       
+   
+     <% end %>
+     <% if screen then %>
+     <td class="list-actions">
+     <dt><% if volunteer.share %> <%= link_to 'Show', volunteer %> <% end %></dt>
+    <dd><%= link_to 'Edit', edit_volunteer_path(volunteer) %></dd></td>
+  <% end %>
+  
+  </tr>
+<% end %>
+<tr class="toprow">
+    <th>Totals</th>
+  
+     <th>Last Name</th>
+       <th>First Name</th>
+        <th>Signed up</th>
+       <th>Area</th>
+    <th>Hours</th>
+     <th>First BS year</th>
+    <th>First key year</th>
+     <th>Old Hat</th>
+     <% if !screen %>
+     <th><%=@sum_tix_adult %></th>
+     <th><%=@sum_tix_student %></th>
+     <th><%=@sum_tix_child %></th>
+     <% end %>
+   <th>Email</th>
+    <th>Phones</th>
+   
+    <th>Address</th>
+     <% if screen then %>
+     <th>Profile</th>
+   <th />
+    <% end %>
+  </tr>
+</table>
+
+
+

@@ -1,0 +1,11 @@
+<div id="volunteer-list">
+
+
+<h1>Volunteer 
+
+    <a href="/volunteers" id="none">Info</a>
+   <a href="/volunteers/prefs" id="current">Preferences</a>
+   </h1>
+<%=render :partial=>'prefs', :locals=>{:screen=>true}%>
+</div>
+<%= link_to 'New volunteer', new_volunteer_path %>

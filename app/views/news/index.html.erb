@@ -1,0 +1,47 @@
+<div id="home">
+<h1>
+<table><tr><td>
+The time has come, the Walrus said, To talk of many things: <br/>
+Of shoes and ships and sealing wax, and Blue Skies!<br/>
+</td><td><p style="text-align:right"><span class="b"> Only <%=sleeps%> more sleeps until BLUE SKIES!</span></td></tr></table>
+</h1>
+
+<div id="pref">
+<% sh="link_to 'Show', c" %>
+<table>
+<% if session[:volunteer_id] %>
+<tr class="<%= cycle('list-line-even', 'list-line-odd') %>">
+    <td>
+    <%= @comment.id %>
+    </td>        
+    <td >
+    <%= (Time.now).to_s(:short) %>
+    </td>        
+    <td><%= @volunteer.name if @volunteer %></td>
+    <!--% form_tag(:url=>{:action=>:new_entry}) do %--> 
+    <% form_for :comment, @comment, :url=>{:action=>:new_entry} do |f| %> 
+    <td><%= f.text_area :entry, :size => "80x5" %><span class="pref-form-button" align="top" ><%= submit_tag 'Post' %></span></td>
+    <% f.hidden_field :volunteer_id %>
+    
+    <% end %>
+</tr>
+<% end %>
+<% @comments.each do |c| %>
+  <tr class="<%= cycle('list-line-odd', 'list-line-even')%>">
+    <td>
+    <%= c.id %>
+    </td>        
+    <td class="tim">
+    <%= (c.created_at).to_s(:short) %>
+    </td>        
+<td>
+    <%= c.volunteer.name %>
+    </td>    
+    <td><%= trc(c) %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+</div>
+<br />
+

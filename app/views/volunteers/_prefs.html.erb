@@ -1,0 +1,69 @@
+<table>
+<tr align='left' class="toprow">
+<th rowspan='2'/>
+<th colspan='2'>Name</th><th colspan='3'>Hours</th><th colspan='4'>Availability</th><th colspan='3'>Times</th><th colspan='4'>Places</th><th  rowspan='2'>Other</th> <th rowspan='2'/>
+</tr>
+  <tr class="toprow">
+    
+
+    <th>First</th>
+     <th>Last</th>
+    <th>2010</th>
+    <th>Total</th>
+   
+    <th>Length</th>
+  
+       <th>Thurs</th>
+     <th>FriPM</th>
+       <th>MonAM</th>
+     <th>MonPM</th>
+       <th>Early</th>
+     <th>Dinner</th>
+       <th>Late</th>
+     <th>Good</th>
+     <th>Bad</th>
+      <th>Gate</th>
+     <th>Inner</th>
+     
+      
+  </tr>
+
+<% @volunteers.each do |volunteer| %>
+    
+    <td>
+    <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
+    <td class="icon-image"><%= get_icon(volunteer, screen)  %></td>
+ 
+    <td><%=h volunteer.first_name %></td>
+    <td><%=h volunteer.last_name %></td>
+   
+      <td><%=h volunteer.shifts.size*2 %></td>
+    <td><%=h volunteer.hours %></td>
+   <td><%=h volunteer.shiftlength %></td>
+    <td><%=ok_disp(volunteer.thursday) %></td>
+     <td><%=ok_disp(volunteer.friday_pm) %></td>
+      <td><%=ok_disp(volunteer.monday_am) %></td>
+       <td><%=ok_disp(volunteer.monday_pm) %></td>
+   
+   
+
+	 <td class="face"><%= time_disp(volunteer.early) %></td>
+	  <td class="face"><%= time_disp(volunteer.dinner) %></td>
+	   <td class="face"><%= time_disp(volunteer.late) %></td>
+	   <td><%=loc_disp(volunteer.best_loc) %></td>
+    <td><%= loc_disp(volunteer.worst_loc) %></td>
+     <td><%=ok_disp(volunteer.gate) %></td>
+      <td><%=ok_disp(volunteer.inner) %></td>
+    
+     <td><%=h truncate volunteer.restrictions, :length =>20 %></td>
+     
+    <td class="list-actions">
+    <dt><% if volunteer.share %> <%= link_to 'Show', volunteer %> <% end %></dt>
+    <dd><%= link_to 'Edit', edit_volunteer_path(volunteer) %></dd></td>
+<!--   
+   <td><%= link_to 'Schedule', :action=>'schedule', :id=>volunteer %></td>
+    <td><%= link_to 'Destroy', volunteer, :confirm => 'Are you sure?', :method => :delete %></td>
+    -->
+  </tr>
+<% end %>
+</table>

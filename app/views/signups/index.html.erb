@@ -1,0 +1,28 @@
+<h1>Listing signups</h1>
+
+<table>
+  <tr>
+    <th>Volunteer</th>
+    <th>Year</th>
+    <th>Tix ad</th>
+    <th>Tix st</th>
+    <th>Tix ch</th>
+  </tr>
+
+<% @signups.each do |signup| %>
+  <tr>
+    <td><%=h signup.volunteer_id %></td>
+    <td><%=h signup.year %></td>
+    <td><%=h signup.tix_ad %></td>
+    <td><%=h signup.tix_st %></td>
+    <td><%=h signup.tix_ch %></td>
+    <td><%= link_to 'Show', signup %></td>
+    <td><%= link_to 'Edit', edit_signup_path(signup) %></td>
+    <td><%= link_to 'Destroy', signup, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New signup', new_signup_path %>

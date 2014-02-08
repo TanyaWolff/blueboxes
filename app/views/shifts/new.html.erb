@@ -1,0 +1,25 @@
+<h1>New shift</h1>
+
+<% form_for(@shift) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :start %><br />
+    <%= f.datetime_select :start %>
+  </p>
+  <p>
+    <%= f.label :location %><br />
+<%= select("shift", "location_id", Location.find(:all).collect{ |loc| [ loc.name, loc.id] }) %>
+     <%= link_to 'New location', locations_path %>
+<p>
+   
+<%= f.label :volunteer %><br />
+<%= select("shift", "volunteer_id", Volunteer.find(:all).collect{ |v| [ v.name, v.id] }, {:include_blank => 'nobody'}) %>
+<%= link_to 'New volunteer', volunteers_path %>
+</p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', shifts_path %>

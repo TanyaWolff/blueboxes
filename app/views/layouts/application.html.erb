@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Blue Skies</title>
+  <%= stylesheet_link_tag "depot", :media => "all" %>
+  
+</head>
+<body id="body">
+<div id="banner">
+<table style="width:100%;"><tr><td>
+  <%= @page_title || "Blue Skies Schedules" %>
+  </td><td style="text-align:right;">
+  <span class="depot-form">
+	<% if  session[:volunteer_id] then%>
+		
+		<fieldset>
+		<% form_tag(:controller=>:admin, :action=>:logout) do %>
+			Hello <%= (Volunteer.find(session[:volunteer_id])).name %> 
+			
+		<%= submit_tag 'Logout' %>
+		<% end %>
+		</fieldset>
+	<% else %>
+		<fieldset>
+		<% form_tag(:controller=>:admin, :action=>:login) do %>
+			Name <%= text_field_tag :name, params[:name], :size=>12 %>
+			Password <%= password_field_tag :password, params[:password], :size=>12  %>
+		<%= submit_tag 'Login' %>
+		<% end %>
+		</fieldset>
+	<% end %>
+  </span>
+</td></tr>
+</table>
+<div id="sub-banner">
+	<%= link_to 'Home', :controller=>'home'%>|
+    <%= link_to 'News', :controller=>'news'%>|
+    <%= link_to 'ParkingSchedule', :controller=>'schedules', :action=>'show', :id => 20 %>|
+	<%= link_to 'GateSchedule', :controller=>'schedules', :action=>'show', :id => getGateScheduleId() %>|
+    <%= link_to 'Domain', :controller=>'admin' %>|
+     
+     
+	<% if  session[:volunteer_id] then%>|
+		<%= link_to 'Profile', :controller=>'volunteers', :action=>'show', :id => session[:volunteer_id] %>|	
+		<%= link_to 'Passw', :controller=>'volunteers', :action=>'edit_pw',:id=>session[:volunteer_id]  %>|		
+		<%= link_to 'Gallery', :controller=>'gallery'%>|
+		<%= link_to 'Volunteers', volunteers_path %>|
+		<%= link_to 'Emails', :controller=>'volunteers', :action=>'email' %>|
+          
+		<% if session[:isHat] then%>|
+		<span class="admin-box" style="color:yellow;font-weight:bold">
+			Admin Zone:
+	     
+		<%= link_to 'Hat Areas', areas_path %>|
+		<%= link_to 'Locations', locations_path %>|
+		<%= link_to 'Schedules', schedules_path %>|
+		<%= link_to 'Stats', :controller=>'admin', :action=>'stats' %>
+        
+		</span>
+		<% end %>
+	     
+	<% end %>
+    
+  </div>
+</div>
+
+<div id="columns">
+  
+  <div id="main">
+    <p style="color: green;"><%= flash[:notice] %></p>
+	<p style="color: red;font-size:14pt;font-weight:bold;"><%= flash[:error] %></p>
+    <%= yield :layout %>
+  </div>
+<div id="rside">
+</div>
+</div>
+
+
+</body>
+</html>
+

@@ -1,0 +1,40 @@
+<h1>Duplicate schedule</h1>
+
+<% form_for(@schedule, :url => { :action => "copy" })  do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :year %><br />
+    <%= f.select :year, [2011,2012,2013,2014] %>
+  </p>
+  <p>
+  Hat Area: <br/>
+  <%=area_choices("schedule") %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :rows=>4%>
+  </p>
+  <p>
+    <%= f.label :start %><br />
+    <%= f.date_select :start%>
+  </p>
+  <p>
+    <%= f.label :end %><br />
+    <%= f.date_select :end%>
+  </p>
+  <p>
+    <%= f.label :shiftlength %><br />
+    <%= f.text_field :shiftlength, :size=>'2', :disabled=>'disabled'%>&nbsp;hours
+    <%= hidden_field :schedule, :shiftlength%>
+  </p>
+  <p>
+    <%= f.submit 'Copy' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', schedules_path %>

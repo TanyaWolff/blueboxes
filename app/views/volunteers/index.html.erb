@@ -1,0 +1,12 @@
+<div id="volunteer-list">
+
+
+<h1>Volunteer   
+      <a href="/volunteers" id="current">Info</a>
+    <a href="/volunteers/prefs" class="none">Preferences</a>
+    <%= button_to "Print", :action => 'print_list'  %>
+
+ </h1>
+<%=render :partial=>'info', :locals=>{:screen=>true}%>
+</div>
+<%= link_to 'New volunteer', new_volunteer_path %>

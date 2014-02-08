@@ -1,0 +1,10 @@
+<%= error_messages_for 'picture' %>
+<% form_for(:picture, :url =>{:action=>'save'}, :html =>{:multipart=>true}) do |form| %>
+<table>	
+<tr><td>	Comment: </td><td> <%=form.text_field("comment") %></td></tr>
+<tr><td>	Upload your picture: (less than 100k): </td><td><%= form.file_field("uploaded_picture") %></td></tr>
+</table>
+	<%= submit_tag("Upload file") %>
+<% end %>
+	
+	

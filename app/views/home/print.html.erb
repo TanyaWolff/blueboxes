@@ -1,0 +1,6 @@
+<h1>Print</h1>
+1. Grab a screenshot of the <%= button_to 'Schedule', :controller => :parking %> OR<br>
+2. You can get the latest data here for putting into your own formatted spreadsheet<br>
+Suggestion: paste the data to Excel. Data > Text to columns to separate by commas. <%= button_to 'Show Raw Data', :controller => :parking, :action => :getData %>
+OR<br>
+3. You can get my formatted excel spreadsheet here but it may not have the latest data (check the date): <%= button_to 'Download Formatted', :controller => :parking, :action => :save %>

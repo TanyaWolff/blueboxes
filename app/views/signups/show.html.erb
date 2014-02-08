@@ -1,0 +1,28 @@
+<p>
+  <b>Volunteer:</b>
+  <%=h @signup.volunteer_id %>
+</p>
+
+<p>
+  <b>Year:</b>
+  <%=h @signup.year %>
+</p>
+
+<p>
+  <b>Tix adult:</b>
+  <%=h @signup.tix_ad %>
+</p>
+
+<p>
+  <b>Tix student:</b>
+  <%=h @signup.tix_st %>
+</p>
+
+<p>
+  <b>Tix child:</b>
+  <%=h @signup.tix_ch %>
+</p>
+
+
+<%= link_to 'Edit', edit_signup_path(@signup) %> |
+<%= link_to 'Back', signups_path %>

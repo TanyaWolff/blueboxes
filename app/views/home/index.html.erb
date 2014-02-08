@@ -1,0 +1,67 @@
+<div id="home">
+<h1>Welcome New and Returning Keys!</h1>
+<p style="text-align:center"><span class="b"> Only <%=sleeps%> more sleeps until BLUE SKIES!</span>
+
+<p>
+Time to sign up for 2013 by going to your profile and signup and specify number of tickets required.
+</p>
+<ul>
+<li>First dibs go to last year's keys and sabbatical hats</li>
+<li>Login, click on your hat area, signup by Feb 15</li>
+<li>Update your password and contact info</li>
+<li>Update your availability and ideal times/spots. Let me know the earliest time you can start on Thursday (2pm is the first)</li>
+<li>When schedule status is "review", please review your shifts and</li>
+<ul>
+<li>login and post a public change request </li>
+<li>you can login and get the current email list if necessary for privacy</li>
+<li>using the postings page will inspire collaboration and alleviate hat bottleneck</li>
+</ul>
+</ul>
+<% if session[:isHat] %>
+<ul>
+<li>Database schema</li>
+
+<ul>
+<li><%= link_to 'News', comments_path%></li>
+<li><%= link_to 'Hat Areas', areas_path %></li>
+<li><%= link_to 'Volunteers', volunteers_path%></li> 
+<li><%= link_to 'Locations', locations_path%></li>
+<li>location_schedules</li>  
+<li><%= link_to 'Pictures', pictures_path%></li>  
+<li><%= link_to 'Schedules', schedules_path%></li> 
+<li><%= link_to 'Shifts', shifts_path%></li>  
+<li><%= link_to 'Signups', signups_path%></li>  
+</ul>
+<li>Pages</li>
+<ul>
+<li><%= link_to 'News', :controller=>'news'%></li>
+<li><%= link_to 'Email', :controller=>'volunteers', :action=>'email' %></li>
+<li><%= link_to 'Tickets', :controller=>'admin', :action=>'stats' %></li>
+</ul>
+</ul>
+<% else %>
+
+<p>Pages</p>
+<ul>
+<li><%= link_to 'News', :controller=>'news'%></li>
+<li><%= link_to 'Email', :controller=>'volunteers', :action=>'email' %></li>
+</ul>
+
+<% end %>
+
+
+<p style="text-align:center"> <%=link_to car_disp, :controller=>'admin'%></p>
+
+</div>
+<!--
+<p style="text-align:center"> <span class="c">We have 3 hats, 1 apprentice and <%=@keycount%> keys signed up for 2013! </span></p>
+
+<h2>2012 schedule</h2>
+
+<div class="home-button" >
+<%= button_to 'Download', :controller => :parking, :action => :save %>
+</div>
+
+
+-->
+

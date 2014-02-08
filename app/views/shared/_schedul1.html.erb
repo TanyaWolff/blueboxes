@@ -1,0 +1,88 @@
+<div id="product-list">
+<%=h @message %>
+
+
+Last updated: <%=h @schedule.updated_at.strftime("%a %b %d %I:%M%p") %>
+
+<p/>
+ 
+
+<!--% form_for @shift do |f| %-->
+<!--%=  select(:shift, "volunteer_id", Volunteer.find(:all).collect{ |v| [ v.name, v.id]}) %-->   
+<!--%= f.submit 'Update' %-->
+<!--% end %-->
+
+<% daycolor = ["red"] %>
+<% daycolors= ["red","green","purple","darkblue","orange"] %>
+<% daynames = ["THU","FRI", "SAT", "SUN","MON"] %>
+
+<% nslots = [2,6,6,6,2] %>
+<% 
+   
+   nShifts = @shifttimes.size
+   
+%>
+  
+<table border="1" >
+  <tr>
+  <th style="background-color: <%= daycolor %>"></th>
+  <% for t in @shifttimes %>
+     <th style="background-color: <%= daycolor %>"><%= t.strftime("%a") %></th>
+  <% end %>
+<th style="background-color: <%= daycolor %>">#</th>
+
+  </tr>
+
+  <tr>
+   <th></th>
+    
+    <% for t in @shifttimes %>
+      <th><%= t.strftime("%l%P") %></th>
+    <% end %>
+  </tr>
+
+  
+  
+  <% @allV.each do |v| %>
+  <tr class="<%= cycle('list-line-odd', 'list-line-even') %>"> 
+ 
+     <% vlocs = display_by_volunteer(v) %>
+    
+     <td><%=v.name%></td>    
+     <% for loc in vlocs do %>
+       <td>
+        <%= loc %>
+       </td>
+     <% end %>
+     <td>
+        <%= v.shifts.size %>
+       </td>
+
+  </tr>
+  <% end %>
+  
+ <tr>
+  <th style="background-color: <%= daycolor %>"></th>
+  <% for t in @shifttimes %>
+     <th style="background-color: <%= daycolor %>"><%= t.strftime("%a") %></th>
+  <% end %>
+<th style="background-color: <%= daycolor %>">#</th>
+
+  </tr>
+
+  <tr>
+   <th></th>
+    
+    <% for t in @shifttimes %>
+      <th><%= t.strftime("%l%P") %></th>
+    <% end %>
+  </tr>
+
+  
+</table>
+  
+
+
+</div>
+
+<!--sh.volunteer.name.initial_caps -->

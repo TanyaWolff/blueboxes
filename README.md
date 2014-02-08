@@ -1,7 +1,7 @@
 # BlueBoxes
 ===========
-## Here is **BlueBoxes**, the BlueSkies volunteer scheduling application. 
-+ We have *hats* and *keys* and interesting ideas. 
+### Welcome to **BlueBoxes**, the BlueSkies volunteer scheduling application. 
++ We sort *hats* and *keys* and interesting ideas. 
 + We have green food and blue bins. 
 + We share rides to the bridge, the beer store and **Blue Skies**. 
 + We help our neighbours. 
@@ -15,6 +15,5 @@
 + We park, we listen, we play, we reuse, we share. 
 + We love Magoo, Tilston and all BlueSkies organizers
 + We love **BlueSkies**
----
-> We are **BlueBoxes**! 
-=======
+
+### We are **BlueBoxes**! 

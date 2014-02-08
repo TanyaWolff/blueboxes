@@ -1,0 +1,13 @@
+<div id="thetable">
+ <table border="1" >
+ <td>2011</td>
+ <%=timeheader(@tms)%>
+ 
+  <% @ppl_sh_s.each do |k|  %>
+ <% if k!=nil%>
+ <tr class="<%=cycle('list-line-even','list-line-odd')%>"> <%=vol_row(@ppl_sh[k],@tms)%></tr>
+ <% end %>
+<% end %>
+ 
+ </table>
+</div>

@@ -1,0 +1,50 @@
+<div id="product-list">
+<%=h @message %>
+
+
+Last updated: <%=h @sched2010.updated_at.strftime("%a %b %d %I%p") %>
+
+<p/>
+<!--% form_for @shift do |f| %-->
+<!--%=  select(:shift, "volunteer_id", Volunteer.find(:all).collect{ |v| [ v.name, v.id]}) %-->   
+<!--%= f.submit 'Update' %-->
+<!--% end %-->
+
+<% daycolor="red" %>
+<% daynames = ["THU","FRI", "SAT", "SUN","MON"] %>
+
+<% nslots = [3,7,7,7,3] %>
+<% i1=0 
+   i2=i1+nslots[0]
+   d=0
+%>
+
+<% nslots.each do |n| %>
+  <% i2=i1+n-1 %>
+  <table border="1" >
+  <tr>
+   <th style="background-color: <%= daycolor %>"><%= daynames[d] %></th>
+    <% d=d+1 %>
+    <% for t in @shifttimes[i1..i2] %>
+      <th><%= t.strftime("%l%P") %></th>
+    <% end %>
+  </tr>
+  <% lgroups = @sched2010.shifts.group_by {|shift| shift.location} %>
+  <% lgroups.keys.each do |l| %>
+     <%  w=lgroups[l].sort_by { |x| x[:start] }%>
+     <tr class="<%= cycle('list-line-odd', 'list-line-even') %>">
+     <td><%=l.name%></td>
+       
+     <% w[i1..i2].each do |sh| %>
+    	  <td><%=h sh.volunteer.name[0,5] if sh.volunteer%></td>
+     <% end %>
+     </tr>
+  <% end %>
+  </table>
+  
+<% i1=i2+1 %> 
+<% end %>
+
+</div>
+
+<!--sh.volunteer.name.initial_caps -->

@@ -1,0 +1,35 @@
+<div id="product-list">
+<h1> Updating Schedule: <%= @schedule.title %> </h1>
+<h3>Shifts assigned: <%=h @n_assigned %></h3>
+<h3>Status: <%=status(@schedule.year)%></h3>
+<%= debug(params) %>
+<% form_tag(:action => :assign) do  %>
+<!--%= text_field_tag(:vo, params[:vo], :size=>3) %-->
+<%= select_tag(:vol, options_for_select(Volunteer.all.collect{ |v| [ v.name, v.id] }, @volunteer.id)) %>
+<%= submit_tag 'set'%>  Number of 2 hour shifts for <%=@volunteer.name%>: <%=@n_shifts%> 
+
+<% end %>
+<%=h @message %>
+<div id="assign">
+<table border="1" >
+  <tr style="background-color: lightgreen;" > <td/> <% Location.all.each do |l| %><th width="40"><%=l.name%></th><% end %> </tr>
+    <span class="sched-form-button" >
+  <% @shift_days.keys.each do |d| %>  
+	<tr><th style="background-color: green; color: white" colspan=<%=@x%>><%= @shift_days[d][0].start.strftime("%a, %b %d, %Y") %></th></tr>
+	<% shift_hours=@shift_days[d].group_by{|x| x.start.hour} %>
+	<% shift_hours.keys.each do |t| %>
+		<tr> <th style="background-color: lightgreen;" ><%= shift_hours[t][0].start.strftime("%I %p")%></th>
+		<% shift_hours[t].each do |loc|%>
+		          <% name=' ' %>
+			  <% name=loc.volunteer.name if loc.volunteer%>
+			    <% buttoncolor="red" if loc.volunteer==@volunteer%>
+			<td "style="color: #{buttoncolor}"><span id="slot" ><%=button_to name, :action=>'update_shift', :id=>loc, :vol=>@volunteer, :size=>100%></span></td>
+	<% buttoncolor="black" %>
+     
+		<%end%></tr>
+
+	<% end %>
+  <% end %>
+ 
+</table>
+</div>

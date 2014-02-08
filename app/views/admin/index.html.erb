@@ -1,0 +1,30 @@
+<div id="pref">
+<h1>Enter your domain </h1>
+Currently in: <%=  (Area.find(session[:area]).name  if session[:area] )|| "Dragons Land"%> 
+
+<table align="center"> 
+
+<tr>
+  
+  <% @areas.each do |area| %>
+  <td>
+  <table class="areaclass">
+  <tr> <td  class="icon-image"><%= link_to  thumb(area), :action => :set_area, :id => area.id %></td></tr>
+   <tr><td><%=h area.name %></td></tr>
+    <tr><td><%=h @signups[area.id].size %> </td></tr>
+  </table>
+  </td>
+  <% end %>
+  <td>
+  <table>
+  <tr> <td  class="area-image"><%= link_to image_tag('people.jpg'),  :controller => 'admin', :action => 'unset_area' %></td></tr>
+   <tr><td>Everybody</td></tr>
+    <tr><td><%=h Volunteer.count %> </td><td>Volunteers</td></tr>
+  </table>
+  </td>
+  
+  </tr>
+
+</table>
+	
+</div>

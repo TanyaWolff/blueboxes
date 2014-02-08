@@ -1,0 +1,99 @@
+/* Applies to overall page */
+BODY{
+	background-color : #A1ABC1;
+	font-family : arial, helvetica, sans-serif;
+}
+
+/* Headers and titles */
+H1{
+	border-style: solid;
+	color : White;
+	background-color : #1D3A7B;
+	font : bold;
+	border : thin solid #0E1B39;
+	padding-left: 10px;
+	border-width: 0px;
+	text-align : left;
+}
+H2{
+	color : #0E1B39;
+	border-bottom : thin solid #0E1B39;
+	padding-left: 10px;
+	border-width: 0px;
+	text-align : left;
+}
+H3{
+	color : #0E1B39;
+	font : lighter;
+	padding-left: 10px;
+	border-width: 0px;
+	text-align : left;
+}
+
+/* Horizontal rules */
+HR{
+	color : #0E1B39;
+	height: 2px;
+}
+
+/* Paragraphs */
+P{
+	color : black;
+	font : small;
+}
+
+/* Hyperlinks */
+A{
+	text-decoration : underline;
+	color : #4C4C4C;
+}
+A:VISITED{
+	color: #707070;
+	text-decoration : underline;
+}
+A:HOVER{
+	color: #99092F;
+	text-decoration : underline;
+}
+A:ACTIVE{
+	color: #4C4C4C;
+	text-decoration : underline;
+}
+
+/* Lists */
+OL{
+	color : #0E1B39;
+	margin-left : 5%;
+	font : bold;
+	}
+UL{
+	color : #0E1B39;
+	margin-left : 5%;
+	list-style-type : circle;
+	list-style-image : url(/blueskies/app/views/admin/bluesky001bu.gif);
+	list-style-position: outside;
+}
+
+/* Tables */
+TABLE {
+	border : 0px;
+	}
+TH{
+	color : White;	
+	text-align : center;
+	background-color : #1D3A7B;
+	border-width : 0px;
+	border-bottom : thin solid #0E1B39;
+	padding : 2px;
+	text-align : center;
+}
+TD{
+	color : #0E1B39;
+	text-align : left;
+	background-color : #A1ABC1;
+	font : smaller;
+	border-width : 0px;
+	border-bottom : thin dotted #0E1B39;
+	padding : 2px;
+	margin : 0px, 0px, 0px, 5px;
+}

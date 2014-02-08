@@ -1,0 +1,6 @@
+<%= error_messages_for :volunteer %>
+<% form_for(@volunteer) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f, :button => 'Create', :title =>'New volunteer'}  %>
+<% end %>
+
+<%= link_to 'Back', volunteers_path %>

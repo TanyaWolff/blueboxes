@@ -1,0 +1,67 @@
+<div id="volunteer-show">
+<h1><%=h @volunteer.first_name %>&nbsp;<%=h @volunteer.last_name %></h1>
+
+<table >
+<tr style="valign:top;"><td >
+<%=portrait(@picture)%>
+</td>
+
+<td valign="top">
+<b>Hat Area:</b>  <%=h @volunteer.area.name if @volunteer.area %><br>
+  <b>Profile:</b>  <%=h @volunteer.profile %><br>
+  <b>Display/Login:</b  <%=h @volunteer.name %>
+</td>
+</tr>
+
+</table>
+<div class="pref-form" style="font-size:small">
+<div id="pref" style="font-size:smaller">
+<div id="lefthalf">
+<table class="show" style="width:300px;">
+<tr class="list-line-head"><th colspan="2">Personal Info</th></tr>
+
+<tr><th>Email</th><td><%=h @volunteer.email %></td></tr>
+<tr><th>Phone</th><td><%=h @volunteer.phone %></td></tr>
+<tr><th>Cell</th><td><%=h @volunteer.cell %></td></tr>
+<tr><th>Address</th><td><%=h @volunteer.address %></td></tr>
+<tr><th>Privacy:share</th><td><%=h @volunteer.share %></td></tr>
+<tr class="list-line-head"><th colspan="2">General Info</th></tr>
+<tr><th>Tickets</th><td><%=h @volunteer.tickets %>+<%=h @volunteer.tix_students %>+<%=h @volunteer.tix_kids %></td></tr>
+<tr><th>1st BS Year</th><td><%=h @volunteer.first_year_bs %></td></tr>
+<tr><th>1st Key Year</th><td><%=h @volunteer.first_year_key %></td></tr>
+
+<tr><th>Retired hat</th><td><%=h @volunteer.old_hat %></td></tr>
+
+<tr class="list-line-head"><th colspan="2">Availability</th></tr>
+<tr><th>Thursday</th><td><%=h @volunteer.thursday %></td></tr>
+<tr><th>Friday PM</th><td><%=h @volunteer.friday_pm%></td></tr>
+<tr><th>Monday AM</th><td><%=h @volunteer.monday_am %></td></tr>
+<tr><th>Monday PM</th><td><%=h @volunteer.monday_pm %></td></tr>
+</table>
+</div>
+<div id="righthalf">
+<table class="show">
+<tr class="list-line-head"><th colspan="2">Preferences</th></tr>
+<tr><th>Hours</th><td><%=h @volunteer.hours %></td></tr>
+<tr><th>Shift Length</th><td><%=h @volunteer.shiftlength %></td></tr>
+<tr><th>Other Pref</th><td><%=h @volunteer.restrictions %></td></tr>
+<tr><th>Try busy gate</th><td><%=h @volunteer.gate %></td></tr>
+<tr><th>Try busy inner</th><td><%=h @volunteer.inner %></td></tr>
+<tr><th>8am</th><td><%= time_d(@volunteer.early) %></td></tr>
+<tr><th>6pm</th><td><%= time_d(@volunteer.dinner) %></td></tr>
+<tr><th>8pm</th><td><%= time_d(@volunteer.late) %></td></tr>
+<tr><th>Best spot</th><td><%=loc_disp(@volunteer.best_loc) %></td></tr>
+<tr><th>Worst spot</th><td><%=loc_disp(@volunteer.worst_loc)%></td></tr>
+</table>
+</div>
+</div>
+</div>
+<div style="clear:both"></div>
+
+
+
+
+
+</div>
+<%= link_to 'Edit', edit_volunteer_path(@volunteer) %> |
+<%= link_to 'Back', volunteers_path %>

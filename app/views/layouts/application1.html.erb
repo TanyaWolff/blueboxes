@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Blue Skies</title>
+  <%= stylesheet_link_tag "depot", :media => "all" %>
+  
+</head>
+<body id="store">
+<div id="banner">
+<table style="width:100%;"><tr><td>
+  <%= @page_title || "Blue Skies Volunteers" %>
+  </td><td style="text-align:right;">
+  <span class="depot-form">
+	<% if  session[:volunteer_id] then%>
+		
+		<fieldset>
+		<% form_tag(:controller=>:admin, :action=>:logout) do %>
+			Hello <%= (Volunteer.find(session[:volunteer_id])).name %> 
+			
+		<%= submit_tag 'Logout' %>
+		<% end %>
+		</fieldset>
+	<% else %>
+		<fieldset>
+		<% form_tag(:controller=>:admin, :action=>:login) do %>
+			Name <%= text_field_tag :name, params[:name], :size=>12 %>
+			Password <%= password_field_tag :password, params[:password], :size=>12  %>
+		<%= submit_tag 'Login' %>
+		<% end %>
+		</fieldset>
+	<% end %>
+  </span>
+</td></tr>
+</table>
+</div>
+
+<div id="columns">
+  <div id="side">
+    <%= link_to 'Home', url_for(:controller=>'parking', :action=>'index')%><br/>
+    <%= link_to 'Schedule', :controller=>'schedules', :action=>'show', :id => 2 %><br/>
+     
+   <% if  session[:volunteer_id] then%>
+	 <%= link_to 'Set Password', :controller=>'volunteers', :action=>'edit_pw', :id => session[:volunteer_id] %><br/>
+	  <%= link_to 'Set Picture', :controller=>'gallery', :action=>'get'%><br/>
+	   <%= link_to 'Gallery', :controller=>'gallery'%><br/>
+      <%= link_to 'Preferences', :controller=>'volunteers', :action=>'edit', :id => session[:volunteer_id] %><br/>
+        <%= link_to 'Volunteers', volunteers_path %><br/>
+     <%= link_to 'Enter', :controller=>'admin' %><br/>
+          
+      <% if session[:isHat] then%>
+      <div class="admin-box">
+	      <p>
+           Admin<p/>
+	    <%= link_to 'Hat Areas', areas_path %><br/>
+               <%= link_to 'Locations', locations_path %><br/>
+           <%= link_to 'Schedules', schedules_path %><br/>
+        
+	   </div>
+      <% end %>
+	<p/>
+    <% else %>
+      
+     
+<% end %>
+    
+  </div>
+  <div id="main">
+    <p style="color: green"><%= flash[:notice] %></p>
+    <%= yield :layout %>
+  </div>
+<div id="rside">
+</div>
+</div>
+
+
+</body>
+</html>
+

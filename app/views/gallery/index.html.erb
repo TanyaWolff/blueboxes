@@ -1,0 +1,12 @@
+<h1>Gallery</h1>
+
+
+<% @pics.each do |p| %>
+
+<%=p.id%>: <%=p.comment%>
+<%= image_tag( "uploads/#{p.name}", :alt=>p.id)%>
+
+
+
+
+<% end %>

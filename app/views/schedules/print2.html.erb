@@ -1,0 +1,24 @@
+
+<div id="thetable">
+ 
+<table border="1" >
+  <tr style="background-color: lightgreen;" > <td><%=@schedule.year %></td> <% @locations.each do |l| %><th width="40"><%=l.name%></th><% end %> </tr>
+    <span class="sched-form-button" >
+  <% @shift_days.keys.each do |d| %>  
+	<tr><th style="background-color: green; color: white" colspan=<%=@x%>><%= @shift_days[d][0].start.strftime("%a, %b %d, %Y") %></th></tr>
+	<% shift_hours=@shift_days[d].group_by{|x| x.start.hour} %>
+	<% shift_hours.keys.each do |t| %>
+		<tr class="<%=cycle('list-line-even','list-line-odd')%>"> <th style="background-color: lightgreen;" ><%= shift_hours[t][0].start.strftime("%I %p")%></th>
+		<% shift_hours[t].each do |loc|%>
+		          <% name=' ' %>
+			  <% name=loc.volunteer.name if loc.volunteer%>
+			<td><span class="sched-form-button" ><%= name%></span></td>
+     
+     
+		<%end%></tr>
+
+	<% end %>
+  <% end %>
+  </table>
+ 
+</div>

@@ -1,0 +1,133 @@
+<h1><%=title%> <%= @volunteer.first_name%> <%= @volunteer.last_name%> <span class="pref-form-button" align="right" >
+   <%= f.submit button%>
+</span></h1>
+<div class="pref-form" >
+<table>
+<tr><td style="color:red;font-weight:bold;">SIGN ME UP FOR <%=Date.today.year%></td><td ><%= f.check_box :sign_up, :checked=>signed_up(@volunteer)%></td>
+<td style="color:red;font-weight:bold;">Tickets </td><td > Adult <%= f.text_field :tix, :size=>'3', :value=>@volunteer.tickets %> Student <%= f.text_field :tix_students, :size=>'3' %> Kid <%= f.text_field :tix_kids, :size=>'3' %></td></tr>
+ </table>
+<% if session[:isHat] %>
+<h2>Admin Zone</h2>
+<tr><td>Hat Area</td><td> <%=area_choices("volunteer") %></td>
+</tr>
+  <p>
+    <%= f.label :key %> <%= f.check_box :key %> <%= f.label :hat %> <%= f.check_box :hat %>
+  </p>
+<table>
+<tr><td>Password</td><td><%= f.text_field :password %></td></tr>
+<tr><td>Password confirmation</td><td><%= f.text_field :password_confirmation %></td></tr>
+</table>
+<% end %>
+<div id="pref" >
+<h2>Personal Info</h2>
+<div id="lefthalf">
+<%= link_to 'Change picture', :controller=>'gallery', :action=>'get'%>
+<table style="width:350px;">
+<tr><td style="width:100px">First Name</td><td> <%= f.text_field :first_name %></td></tr>
+<tr><td>Last Name</td><td> <%= f.text_field :last_name %></td></tr>
+
+
+<tr><td>Display Name</td><td> <%= f.text_field :name %></td></tr>
+
+<tr><td>Email</td><td><%= f.text_field :email %></td></tr>
+<tr><td>Phone</td><td><%= f.text_field :phone %></td></tr>
+<tr><td>Cell</td><td><%= f.text_field :cell %></td></tr>
+<tr><td>Address</td><td><%= f.text_area :address, :rows=>'3' %></td></tr>
+</table>
+</div>
+<div id="righthalf" >
+<table style="width:350px;">
+<tr><td style="width:100px;">
+  Profile (See the full profile by clicking on 'show' in the volunteer list page.)</td><td>
+  <%= f.text_area :profile, :rows => '3' %>
+  </td></tr>
+   
+  <tr><td >
+  Privacy</td ><td>
+  <%= f.check_box :share %>Share personal info with other parking people
+  </td></tr>
+  <tr><td>First BS year</td><td> <%= f.text_field :first_year_bs, :size=>'3' %>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First key year <%= f.text_field :first_year_key, :size=>'3' %></span></td></tr>
+  <tr><td>Old Hat</td><td> <%= f.check_box :old_hat%></td></tr>
+  
+  
+  </table>
+</div>
+</div>
+<div style="clear:both"></div>
+ 
+<div id="pref" >
+<h2>Preferences</h2>
+<div id="lefthalf">
+<table >
+<tr><td style="width:100px;">Hours</td>
+<td>
+<table class="inner">
+<tr><td colspan="2">2010 hours:<%= @volunteer.shifts.size * 2%></td></tr>
+<tr class="list-line-even"><td>Total hours</td>		<td><%= f.text_field :hours, :size => '4'%></td></tr>
+<tr class="list-line-odd"><td><%= f.label 'Shift length' %></td><td><%= f.text_field :shiftlength, :size => '4' %></td> </tr>
+</table>
+</td></tr>
+<tr><td>Availability</td>
+<td>
+<table class="inner">
+<tr class="list-line-even"><td>Thurs Eve/Fri AM</td>		<td><%= f.check_box :thursday %></td></tr>
+<tr class="list-line-odd"><td>Friday Evening</td>		<td><%= f.check_box :friday_pm %></td></tr>
+<tr class="list-line-even"><td>Monday Morning</td>		<td><%= f.check_box :monday_am %></td></tr>
+<tr class="list-line-odd"><td>Monday Afternoon</td>		<td><%= f.check_box :monday_pm %></td></tr>
+
+</table>
+</td></tr>
+
+<tr><td>Audacity</td>
+<td><table class="inner">
+
+<tr class="list-line-odd"><td>Busy Gate</td>		<td><%= f.check_box :gate %></td></tr>
+<tr class="list-line-even"><td>Busy Inner</td>		<td><%= f.check_box :inner %></td></tr>
+
+</table>
+</td></tr>
+</table>
+
+</div>
+<div id="righthalf">
+<table>
+
+
+<tr><td style="width:100px;">Times</td>
+<td><table class="inner">
+<tr class="list-line-even"><td>Early</td>		<td>
+<% [ 'like', 'flexible', 'dislike' ].each_with_index do |early, i| %>
+   <%= f.radio_button 'early', i%> <%= early.humanize %>
+<% end %>
+</td></tr>
+<tr class="list-line-odd"><td>Dinner</td>		<td>
+<% [ 'like', 'flexible', 'dislike' ].each_with_index do |dinner, i| %>
+   <%= f.radio_button 'dinner', i%> <%= dinner.humanize %>
+<% end %>
+</td></tr>
+<tr class="list-line-even"><td>Late</td>		<td>
+<% [ 'like', 'flexible', 'dislike' ].each_with_index do |late, i| %>
+   <%= f.radio_button 'late', i%> <%= late.humanize %>
+<% end %>
+</td></tr>
+</table></td></tr>
+<tr><td>Locations</td>
+<td><table>
+<tr class="list-line-odd"><td>My Happy Place</td>	<td><%=best_location_choices %></td></tr>
+<tr class="list-line-even"><td>Here Be Dragons</td>	<td><%=worst_location_choices%></td></tr>
+</table></td></tr>
+<tr><td>Other Preferences</td>
+
+<td><%= f.text_area :restrictions, :rows=>3 %></td></tr>
+</table>
+</div>
+
+</div> 
+</div>
+<div style="clear:both;"></div>
+
+
+<span class="pref-form-button" align="right" >
+    <%= f.submit button%>
+</span>

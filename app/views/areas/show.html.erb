@@ -1,0 +1,21 @@
+<div id="home">
+<p>
+  <h1> <%=h @area.name %></h1>
+</p>
+
+<table width="100%" style="background-color:lightgreen;font-family:arial;"><tr><td>
+  <b>Messages</b>
+   <%= @area.description %>
+ </td></tr>
+ </table>
+
+<table class="area" style="width:80%; border:1 solid blue;">
+<tr><td><%= link_to 'People', volunteers_path %></td><td><%= link_to 'Locations', locations_path %></td><td><%= link_to 'Schedules', schedules_path %></td></tr>
+<tr><td class="area"><%= pretty_list(@volunteers) %></td><td class="area"><%= pretty_list(@locations) %></td><td class="area"><%= pretty_list(@schedules) %></td></tr>
+
+
+
+</table>
+<h1></h1>
+<%= link_to 'Edit', edit_area_path(@area) %> |
+<%= link_to 'Back', areas_path %>

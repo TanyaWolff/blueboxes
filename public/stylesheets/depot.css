@@ -1,0 +1,686 @@
+/* Global styles */
+
+/* START:notice */
+
+
+#notice {
+  border: 2px solid red;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #f0f0f0;
+  font: bold smaller sans-serif;
+}
+/* END:notice */
+
+
+
+h1 {
+        font:  150% sans-serif;
+        color: #226;
+        border-bottom: 3px dotted #77d;
+		padding-left: 10px;
+}
+h2 {
+        font:  150% sans-serif;
+        color: #226;
+        
+}
+
+A:hover {
+	text-decoration: underline; color:red;
+}
+A:active {
+	text-decoration: underline; overline; color:red
+}
+
+
+#div ul{
+	width: 550px;
+	font: small sans-serif;
+	color: black;
+	
+}
+p {
+	color: black;
+}
+
+
+/* START:mainlayout */
+/* Styles for main page */
+#columns {
+	 #background: url("../images/notes.jpg") repeat;
+	#background-color: #ffff99;
+	
+     margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+
+}
+#banner {
+  
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-bottom: 2px solid;
+  font: small-caps 40px/40px "Arial", serif;
+  color: #282;
+  
+  background: url(../images/clouds.jpg) repeat-x;
+}
+#sub-banner {
+  
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border-bottom: 2px solid;
+  font: small-caps 11px/11px "Arial", serif;
+  color: #282;
+  background: white;
+  opacity:.7;
+}
+#banner img {
+  float: left;
+  height:       50px;
+}
+#banner .banner-image {
+  height:       50px;
+}
+#banner .button-to input {
+        
+	background-color:   darkred;
+	font-family: arial;
+	width: 100%;
+    color: white;
+        
+}
+
+#side {
+ float:left;
+  #padding: 10px;
+  width: 100px;
+  background: white;
+  opacity:.7;
+  text-align: left;
+  color: blue;
+  font-size: small;
+  font-weight: bold;
+  font-family: sans-serif;
+  
+}
+#side .admin-box {
+	background: lightblue;
+	
+}
+#sub-banner .admin-box {
+	opacity:1;
+	background: darkblue;
+}
+#main {
+	 float: left;
+  width: 100%;
+  #padding: 10px;
+  #padding-right: 10px;
+  font-size: small;
+  background: #ffff99;
+
+}
+#main p{
+	
+	font: small sans-serif;
+	
+}
+#main img {
+ 
+  height:       100px;
+}
+#thetable {
+	font-family: arial;
+}
+#volunteer-show img {
+ 
+  height:       250px;
+}
+#show .button-to input {
+        
+	background-color:   orange;
+	
+	font-family: arial;
+	width: 50px;
+    color: white;
+        
+}
+#assign td {
+	color: white;
+}
+#slot .button-to input {
+        
+	background-color:   lightblue;
+	
+	font-family: arial;
+	width: 50px;
+    font-color: white;
+        
+}
+#volunteer-show .show .list-line-head {
+  background:   orange;
+}
+#rside {
+	 float: left;
+    height:600px;
+#background-image: url("/images/notes.jpg") repeat;
+
+}
+
+
+/* END:mainlayout */
+/* home */
+#home {
+	
+	background-color: #ffff99;
+	#background: url(../images/gradientYellow.jpg) repeat;
+	height: 100%;
+	
+}
+#home .home-button {
+   background-color: red;
+   font-size: larger;
+   padding: 5px 5px;
+   font-weight: bold;
+   width: 100px;
+}
+#home ul li{
+	font-family: sans-serif;
+	margin: 0px;
+	color: black;
+	font-size: larger;
+	#background: transparent;
+}
+#home div {
+		
+	
+}
+#home desc {
+	
+	background-color: lightgreen;
+	width: 80%;
+	height: 200px;
+}
+#home textarea {
+	rows: 20;
+	cols: 250;
+}
+#home p  {
+	font-family: sans-serif;
+	margin: 10px;
+	color: black;
+	font-size: larger;
+	font-weight: bold;
+    
+	
+}
+#home .a  {
+	color: orange;
+}
+#home .b  {
+	color: red;
+	 background: transparent;
+}
+#home .c  {
+	color: purple;
+}
+#home .d  {
+	color: red;
+}
+#home .e  {
+	color: lightblue;
+}
+#home img {
+ 
+  height:       50px;
+}
+/* END home */
+
+
+.pref-form select, .pref-form input {
+   background-color: white;
+  
+}
+.pref-form textarea {
+   background-color: white;
+   width: 240px;
+}
+.pref-form-button input {
+   background-color: red;
+   padding: 5px 30px;
+   font-weight: bold;
+   
+}
+#home .pref-form-button input {
+   background-color: red;
+   font-size: larger;
+   padding: 5px 5px;
+   font-weight: bold;
+   width: 100px;
+}
+.sched-form-button input button_to{
+	background-color: orange;
+}
+.sched-form-button submit button_to{
+	background-color: orange;
+}
+.pref-form submit {
+  
+  background-color: #EEFFEE;
+   background-color: darkblue;
+  font-size: larger;
+}
+
+.pref-form div {
+  float:left
+  
+	  
+}
+.pref-form .inner {
+	width: 260px;
+}
+.pref-form td .firstcol {
+	width: 100px;
+}
+
+/* pref */
+
+#pref {
+	
+	
+	 	color: #226;
+       font: small sans-serif;
+	   width: 100%;
+	   
+	   
+}
+#lefthalf {
+	width:320px;
+ }
+#righthalf {
+	padding-left:20px;
+	
+	width:360px;
+}
+
+#pref  p{
+	
+	font: small sans-serif;
+	color: #226;
+	padding: 3px;
+}
+#pref  ul{
+	width: 300px;
+	font: small sans-serif;
+	color: #226;
+	background: transparent;
+}
+#pref  table{
+	 border-collapse: none;
+}
+#pref .list-line-even {
+  background:   lightblue;
+}
+
+#pref .list-line-odd {
+  background:   lightgreen;
+}
+#pref table tr td {
+        padding: 3px;
+        vertical-align: top;
+  	color: #226;
+       font: small sans-serif;
+}
+#pref table th {
+         color:        #244;
+        font-weight:  bold;
+        font-size:    larger;
+}
+
+
+#pref .icon-image img {
+	
+ width: 100px;
+ padding-right: 0px;
+}
+#pref .area-image  {
+ height: 100px;
+ width: 100px;
+ padding-right: 0px;
+ background:transparent;
+padding: 3;
+}
+#pref .areaclass  {
+color:red;text-align:center;font-weight:bold;font-size:14px;
+}
+
+/* volunteer-list */
+
+#volunteer-list img {
+ height: 40px;
+ width: 40px;
+ padding-right: 0px;
+}
+
+#volunteer-list .face img {
+ height: 15px;
+ width: 15px;
+ padding-right: 0px;
+}
+#volunteer-list .icon-image img {
+ height: 40px;
+}
+.pref-form .submit {
+  margin-left: 60px;
+  background-color: #EEFFEE;
+  font-size: larger;
+}
+
+
+#main .button-to input {
+  
+	font-family: arial;
+	 
+	width: 75px;
+        color: darkblue;
+        
+}
+
+
+
+#body {
+  #background: url("../images/notes.jpg") repeat;
+  margin:0;
+}
+
+
+
+#current {
+  background:orange;
+  font-weight:bold;
+}
+#none {
+  font-weight:plain;
+}
+
+/* Product-list */
+
+#product-list .list-image {
+  width:        60px;
+  height:       60px;
+}
+
+#product-list .list-description {
+  width:        60%;
+}
+
+#product-list .list-description dl {
+        margin: 0;
+}
+
+#product-list .list-description dt {
+        color:        #244;
+        font-weight:  bold;
+        font-size:    larger;
+}
+
+#product-list .list-description dd {
+        margin: 0;
+}
+/* volunteer list */
+
+#volunteer-list .list-description {
+  background:   #ffff99; 
+}
+#volunteer-list .list-actions {
+  font-size:    x-small;
+  text-align:   right;
+  padding-left: 1em;
+}
+#volunteer-list table {
+  border-collapse: collapse;
+  border-width: 2px;
+  border-color: white;
+  border-style: solid;
+  font-family: sans-serif ;
+}
+ #volunteer-list tr th{
+  
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+  font-family: sans-serif ;
+}
+
+#volunteer-list .toprow {
+  background: lightgreen;
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+ 
+}
+#volunteer-list .toprow td {
+  background: lightgreen;
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+ 
+}
+#volunteer-list .list-line-even td{
+  background:   #9AFEFF;
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+}
+
+#volunteer-list .list-line-odd td{
+  background:   #5CB3FF;
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+  
+}
+#volunteer-show table {
+  font-family: sans-serif;
+}
+
+#volunteer-show .show th {
+  text-align: left;
+
+}
+
+
+
+
+
+/* START:cartmain */
+/* Styles for the cart in the main page */
+
+.cart-title {
+  font: 120% bold;
+}
+
+.item-price, .total-line {
+  text-align: right;
+}
+
+.total-line .total-cell {
+  font-weight: bold;
+  border-top: 1px solid #595;
+}
+/* END:cartmain */
+
+
+/* START:form */
+/* Styles for order form */
+#banner {
+	position: relative;
+}
+#banner .depot-form  {
+	float: right;
+ font-size: small;
+ color: white;
+  font-family: sans-serif;
+  text-align: right;
+}
+#banner .depot-form fieldset {
+  
+  margin-right: 5px;
+  background: blue;
+  opacity: 1;
+  padding-bottom: 0px;
+  padding-left: 5px;
+  text-align: center;
+  height: 50px;
+  
+}
+
+#banner .depot-form button {
+  
+  color: darkblue;
+}
+
+#main  .depot-form input {
+  color: darkblue;
+}
+#banner .depot-form label {
+  text-align: left;
+  padding-top: 5px;
+  margin-right: 5px;
+}
+#main .depot-form label {
+  text-align: left;
+  padding-top: 5px;
+  margin-right: 5px;
+  font-family: sans-serif;
+}
+#banner .depot-form div {
+  z-index:1;
+  color: white;
+  
+}
+#main .depot-form div {
+  z-index:1;
+  color: white;
+  
+}
+#main .depot-form fieldset {
+  
+  margin-right: 5px;
+  background: url('../images/clouds.jpg') repeat;
+  opacity: 1;
+  padding-bottom: 0px;
+  padding-left: 5px;
+  
+  
+  
+}
+#main .depot-form legend {
+  
+  
+  background: blue;
+  color: white;
+  opacity: 1;
+  padding: 5px;
+  text-align: center;
+  height: 50px;
+  
+}
+/* END:form */
+
+/* The error box */
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: #EEFFEE;
+  display: inline;
+}
+
+.fieldWithErrors * {
+  background-color: red;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+/* schedule-form */
+
+#schedule-form .list-image {
+  width:        60px;
+  height:       60px;
+}
+
+#schedule-form .list-description {
+  width:        60%;
+}
+
+#schedule-form .list-description dl {
+        margin: 0;
+}
+
+#schedule-form .list-description dt {
+        color:        #244;
+        font-weight:  bold;
+        font-size:    larger;
+}
+
+#schedule-form .list-description dd {
+        margin: 0;
+}
+#assignment {
+	color:blue;
+	font: small arial
+	position: absolute;
+	right:10px; top:0px;
+	z-index:100;
+}
+#assignment table {
+	
+	border-collapse: collapse;
+}
+#assignment table td {
+	font: small arial
+	border-width: 1px;
+    border-color: lightgreen;
+    border-style: solid;
+}
+table td.area {
+	vertical-align: top;
+}
+tr.area {
+vertical-align: top;
+}
+td.area {
+vertical-align: top;
+}
+table.area {
+vertical-align: top;
+}

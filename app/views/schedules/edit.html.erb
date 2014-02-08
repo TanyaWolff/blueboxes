@@ -1,0 +1,44 @@
+<h1>Editing schedule</h1>
+
+<% form_for(@schedule) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    Year<br />
+    <%= f.select :year, [2011,2012,2013,2014,2015,2106]%>
+  </p>
+  <p>
+    Status<br />
+    <%= f.select :status, [["draft",0],["review",1],["final",2]]%>
+  </p>
+  <p>
+  Hat Area: <br/>
+  <%=area_choices("schedule") %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+     <%= f.text_area :description, :rows=>4%>
+  </p>
+  <p>
+    <%= f.label :start %><br />
+    <%= f.date_select :start %>
+  </p>
+  <p>
+    <%= f.label :end %><br />
+    <%= f.date_select :end %>
+  </p>
+  <p>
+    <%= f.label :shiftlength %><br />
+    <%= f.select(:shiftlength, [2,3,4,5]) %>hours
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @schedule %> |
+<%= link_to 'Back', schedules_path %>

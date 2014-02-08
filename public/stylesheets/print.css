@@ -1,0 +1,49 @@
+table.invoice_text {}
+table.history {border:1px lightblue solid}
+.invoice_text th {background:lightblue;text-align:left}
+.history th {text-align:left}
+
+tr {border:1px lightblue solid}
+h2 {color:darkred}
+h3 {color:blue}
+p {font:smaller;color:black}
+body {
+	font-size: 10px;
+	font-family: sans-serif;
+}
+.list-line-even {
+  background:   white;
+}
+
+.list-line-odd {
+  background:   #ffff99;
+}
+#info table{
+	
+	border-collapse: collapse;
+	
+	border:1px solid orange;
+
+}
+#info table, th
+{
+	border:1px solid black;
+	
+}
+#info tr
+{
+	border: none;
+}
+
+
+#info th
+{
+	text-align: left;
+	
+	background: lightblue;
+}
+
+#print table {border-collapse: collapse;	border:1px solid #ffff99;}
+#print tr td {border:1px lightgrey solid}
+#print th {text-align: left;background: lightblue; }
+.sun{background: lightblue;}
