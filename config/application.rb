@@ -1,13 +1,20 @@
-# Be sure to restart your server when you modify this file
+require File.expand_path('../boot', __FILE__)
 
+require 'rails/all'
+
+# If you have a Gemfile, require the gems listed there, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(:default, Rails.env) if defined?(Bundler)
+
+# old
 # Specifies gem version of Rails to use when vendor/rails is not present
-# RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
-RAILS_GEM_VERSION = '3.0' unless defined? RAILS_GEM_VERSION
+#RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
-require File.join(File.dirname(__FILE__), 'boot')
+#require File.join(File.dirname(__FILE__), 'boot')
 
-Rails::Initializer.run do |config|
+module Blueboxes
+  class Application < Rails::Application
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
@@ -39,5 +46,5 @@ Rails::Initializer.run do |config|
   # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
-
+  end
 end

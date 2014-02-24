@@ -13,7 +13,7 @@
 + We rise early and do yoga. 
 + We jam late into the night. 
 + We park, we listen, we play, we reuse, we share. 
-+ We love Magoo, Tilston and all BlueSkies organizers
++ We love Magoo, Tilston, Oskar and all BlueSkies organizers
 + We love **BlueSkies**
 
 ### We are **BlueBoxes**! 
