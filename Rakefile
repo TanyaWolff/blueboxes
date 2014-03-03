@@ -5,10 +5,3 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
 Blueboxes::Application.load_tasks
-
-#require(File.join(File.dirname(__FILE__), 'config', 'boot'))
-
-#require 'rake/testtask'
-#require 'rdoc/task'
-
-#require 'tasks/rails'

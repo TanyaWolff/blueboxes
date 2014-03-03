@@ -13,6 +13,7 @@ def area_choices(tab)
 	select(tab, "area_id", Area.find(:all).collect{ |a| [ a.name, a.id] }, :include_blank=>:false)
 end
 def car_disp 
+	return ''
 	file='cars/car'+rand(20).to_s+'.jpeg'
 	image_tag(file)
 end

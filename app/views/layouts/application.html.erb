@@ -36,11 +36,10 @@
 </td></tr>
 </table>
 <div id="sub-banner">
-	<%= link_to 'Home', :controller=>'home'%>|
-    <%= link_to 'News', :controller=>'news'%>|
-    <%= link_to 'ParkingSchedule', :controller=>'schedules', :action=>'show', :id => 20 %>|
-	<%= link_to 'GateSchedule', :controller=>'schedules', :action=>'show', :id => getGateScheduleId() %>|
-    <%= link_to 'Domain', :controller=>'admin' %>|
+	<%= link_to 'Home', :controller=>'areas'%>|
+    <%= link_to 'ParkingSchedule', :controller=>'schedules', :action=>'index' %>|
+	<%= link_to 'GateSchedule', :controller=>'schedules', :action=>'index' %>|
+    <%= link_to 'Domain', :controller=>'admin', :action=>'index' %>|
      
      
 	<% if  session[:volunteer_id] then%>|
