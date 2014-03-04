@@ -17,7 +17,7 @@
 	<% if  session[:volunteer_id] then%>
 		
 		<fieldset>
-		<% form_tag(:controller=>:admin, :action=>:logout) do %>
+		<%= form_tag(:controller=>:admin, :action=>:logout) do %>
 			Hello <%= (Volunteer.find(session[:volunteer_id])).name %> 
 			
 		<%= submit_tag 'Logout' %>
@@ -25,7 +25,7 @@
 		</fieldset>
 	<% else %>
 		<fieldset>
-		<% form_tag(:controller=>:admin, :action=>:login) do %>
+		<%= form_tag(:controller=>:admin, :action=>:login) do %>
 			Name <%= text_field_tag :name, params[:name], :size=>12 %>
 			Password <%= password_field_tag :password, params[:password], :size=>12  %>
 		<%= submit_tag 'Login' %>

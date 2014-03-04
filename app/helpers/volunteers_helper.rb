@@ -2,7 +2,8 @@ module VolunteersHelper
 
 def signed_up(v)
 	thisyear=Date.today.year
-	return !v.signups.find_all{|s| s.year==thisyear}.empty?
+	#return !v.signups.find_all{|s| s.year==thisyear}.empty?
+	return !v.signups.where(year==thisyear).empty?
 end
 def su_disp(v)
 	return 1
@@ -13,10 +14,10 @@ def portrait(pic)
 end
 
 def best_location_choices
-	select("volunteer", "best_loc", Location.find(:all).collect{ |loc| [ loc.name, loc.id] }, :include_blank=>:true)
+	select("volunteer", "best_loc", Location.all.collect{ |loc| [ loc.name, loc.id] }, :include_blank=>:true)
 end
 def worst_location_choices
-	select("volunteer", "worst_loc", Location.find(:all).collect{ |loc| [ loc.name, loc.id] }, :include_blank=>:true)
+	select("volunteer", "worst_loc", Location.all.collect{ |loc| [ loc.name, loc.id] }, :include_blank=>:true)
 end
 
 def loc_disp(i)

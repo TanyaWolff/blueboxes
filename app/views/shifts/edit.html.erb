@@ -1,7 +1,10 @@
 <h1>Editing shift</h1>
 Don't edit start or location!
-<% form_for(@shift) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@shift) do |f| %>
+ <% @area.shift.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+   <% end %>
+
 
   <p>
     <%= f.label :start %><br />
@@ -13,7 +16,7 @@ Don't edit start or location!
   </p>
  <p>
     <%= f.label :volunteer %><br />
-    <%= select(:shift, "volunteer_id", Volunteer.find(:all).collect{ |v| [ v.name, v.id]}) %> 
+    <%= select(:shift, "volunteer_id", Volunteer.all.collect{ |v| [ v.name, v.id]}) %> 
   </p>
 
   <p>

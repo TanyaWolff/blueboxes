@@ -1,7 +1,10 @@
 <h1>Editing comment</h1>
 
-<% form_for(@comment) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@comment) do |f| %>
+ <% @comment.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+   <% end %>
+
 
   <p>
     <%= f.label :entry %><br />

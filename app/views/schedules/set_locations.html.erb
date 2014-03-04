@@ -4,7 +4,7 @@ Locations for <%=@schedule.title %><br>
 <% end %>
 <br>
 Select one location from the following list to add to the schedule.<br>
-<% form_tag(:action=>:set_locations) do%>
+<%= form_tag(:action=>:set_locations) do%>
 <%= select_tag "locations", options_from_collection_for_select(Location.all, "id", "name") %>
    
    <%= submit_tag "Select" %>

@@ -8,7 +8,7 @@ Last updated: <%=h @schedule.updated_at.strftime("%a %b %d %I:%M%p") %>
  
 
 <!--% form_for @shift do |f| %-->
-<!--%=  select(:shift, "volunteer_id", Volunteer.find(:all).collect{ |v| [ v.name, v.id]}) %-->   
+<!--%=  select(:shift, "volunteer_id", Volunteer.all.collect{ |v| [ v.name, v.id]}) %-->   
 <!--%= f.submit 'Update' %-->
 <!--% end %-->
 

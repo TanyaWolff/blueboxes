@@ -1,7 +1,10 @@
 <h1>Editing area</h1>
 
-<% form_for(@area) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@area) do |f| %>
+
+ <% @area.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+   <% end %>
 
   <p>
     <%= f.label :name %><br />

@@ -6,13 +6,16 @@ class VolunteersController < ApplicationController
   # GET /volunteers.xml
   def index
 	 if session[:area]
-		@volunteers = Volunteer.find_all_by_area_id(session[:area], :order => 'hat desc, key desc, last_name')
+		#@volunteers = Volunteer.find_all_by_area_id(session[:area], :order => 'hat desc, key desc, last_name')
+		@volunteers = Volunteer.where(:area_id => session[:area]).order('hat desc, key desc, last_name')
 		#v=Signup.find_all_by_year(2012).map{|s| s.volunteer}.sort_by{|x| x.last_name}.uniq
 		#@volunteers=v.group_by{|a| a.area_id}[session[:area]]
 	else 
-		@volunteers = Volunteer.find(:all, :order => 'hat desc, key desc, last_name')
+		#@volunteers = Volunteer.where(:order => 'hat desc, key desc, last_name')
+		@volunteers = Volunteer.order('hat desc, key desc, last_name')
 	end
-	@sum_tix_adult=@volunteers.sum{|v| v.tickets||0}
+	#@sum_tix_adult=@volunteers.sum{|v| v.tickets||0}
+	@sum_tix_adult=@volunteers.where("tickets != null").sum('tickets')
 	@sum_tix_student=@volunteers.sum{|v| v.tix_students||0}
 	@sum_tix_child=@volunteers.sum{|v| v.tix_kids||0}
     respond_to do |format|
@@ -24,15 +27,16 @@ class VolunteersController < ApplicationController
 @emails='nobody here'
 	 if session[:area]
 	  #@emails=Volunteer.find_all_by_area_id(session[:area]).map{|v| v.email+", " if v.email}
-	@emails=Schedule.find_last_by_area_id(session[:area]).shifts.find(:all, :conditions=>'volunteer_id').map{|v| v.volunteer}.uniq.map{|v| v.email+", " if v.email}
+	@emails=Schedule.find_last_by_area_id(session[:area]).shifts.where(:conditions=>'volunteer_id').map{|v| v.volunteer}.uniq.map{|v| v.email+", " if v.email}
 	else
-	@emails=Volunteer.find(:all).map{|v| v.email+", " if v.email}
+	@emails=Volunteer.all.map{|v| v.email+", " if v.email}
 	end
   end
  
   def prefs
 	
-  @volunteers = Volunteer.find(:all, :order => 'hat desc, key desc, last_name')
+  #@volunteers = Volunteer.find(:all, :order => 'hat desc, key desc, last_name')
+  @volunteers = Volunteer.order('hat desc, key desc, last_name')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -162,7 +166,7 @@ class VolunteersController < ApplicationController
 		@volunteers=v.group_by{|a| a.area_id}[session[:area]]
 		@area=Area.find(session[:area]).name
 	else 
-		@volunteers = Volunteer.find(:all, :order => 'hat desc, key desc, last_name')
+		@volunteers = Volunteer.order('hat desc, key desc, last_name')
 	end
 	@sum_tix_adult=@volunteers.sum{|v| v.tickets||0}
 	@sum_tix_student=@volunteers.sum{|v| v.tix_students||0}

@@ -19,7 +19,7 @@ Of shoes and ships and sealing wax, and Blue Skies!<br/>
     </td>        
     <td><%= @volunteer.name if @volunteer %></td>
     <!--% form_tag(:url=>{:action=>:new_entry}) do %--> 
-    <% form_for :comment, @comment, :url=>{:action=>:new_entry} do |f| %> 
+    <%= form_for :comment, @comment, :url=>{:action=>:new_entry} do |f| %> 
     <td><%= f.text_area :entry, :size => "80x5" %><span class="pref-form-button" align="top" ><%= submit_tag 'Post' %></span></td>
     <% f.hidden_field :volunteer_id %>
     

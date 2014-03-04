@@ -1,7 +1,10 @@
 <h1>Editing schedule</h1>
 
-<% form_for(@schedule) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@schedule) do |f| %>
+ <% @schedule.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+   <% end %>
+
 
   <p>
     <%= f.label :title %><br />

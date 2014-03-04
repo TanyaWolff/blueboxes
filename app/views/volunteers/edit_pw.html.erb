@@ -1,6 +1,9 @@
-<%= error_messages_for :volunteer %>
+ <% @volunteer.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+   <% end %>
 
-<% form_for(@volunteer) do |f| %>
+
+<%= form_for(@volunteer) do |f| %>
  
 
 <div class="depot-form">

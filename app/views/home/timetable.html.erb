@@ -1,11 +1,5 @@
 <div id="product-list">
-<h1>Parking 2010 Schedule</h1>
+<h1>Parking Schedule</h1>
 <%=h @message %>
-
-
-<!--% form_for @shift do |f| %-->
-<!--%=  select(:shift, "volunteer_id", Volunteer.find(:all).collect{ |v| [ v.name, v.id]}) %-->   
-<!--%= f.submit 'Update' %-->
-<!--% end %-->
 
 <%= render :partial => 'schedule'  %>

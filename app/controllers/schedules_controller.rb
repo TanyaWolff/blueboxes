@@ -244,7 +244,8 @@ def assign
 	#@x=Location.count+1 # wrong... this gets all of them
 	@locations=Location.find_all_by_area_id(@schedule.area_id)
 	@x=@locations.size + 1
-	@n_assigned= @schedule.shifts.find(:all, :conditions=>'volunteer_id').size
+	#@n_assigned= @schedule.shifts.find(:all, :conditions=>'volunteer_id').size
+	@n_assigned= @schedule.shifts.where(:conditions=>'volunteer_id').size
 	#
 	# get signed up volunteers by year, get all volunteers in an area, find intersection. 
 	# That will be the list of volunteers for that schedule.
@@ -253,7 +254,8 @@ def assign
 	 vols=vol_by_year & vol_by_area
 	#
 	# get all shifts assigned so far in a schedule and group by volunteer_id
-	 assd=@schedule.shifts.find(:all, :conditions=>'volunteer_id').map{|x| [x.id, x.volunteer_id]}
+	 #assd=@schedule.shifts.find(:all, :conditions=>'volunteer_id').map{|x| [x.id, x.volunteer_id]}
+	 assd=@schedule.shifts.where(:conditions=>'volunteer_id').map{|x| [x.id, x.volunteer_id]}
 	 vol_shifts=assd.group_by{|a,b| b}
 	 vols.each do |v|
 		 @volunteers << Volunteer.find(v)

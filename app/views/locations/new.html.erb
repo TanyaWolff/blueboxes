@@ -1,7 +1,10 @@
 <h1>New location</h1>
 
-<% form_for(@location) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@location) do |f| %>
+ <% @location.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+   <% end %>
+
 
   <table>
     <tr><td><%= f.label :name %>  </td><td> <%= f.text_field :name %></td></tr>

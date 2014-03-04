@@ -1,6 +1,6 @@
 <div id="schedule-form">
 <h1> <table width="100%"><tr><td>Updating Schedule: <%= @schedule.title %> </td><td><%=h status(@schedule.status) %> </td><td>Shifts assigned: <%=h @n_assigned %> </td><td style="text-align:right;"><span id="show"><%= button_to 'Show', @schedule, :method=>:get%></span></td></tr></table></h1>
-<% form_tag(:action => :assign) do  %>
+<%= form_tag(:action => :assign) do  %>
 <%= select_tag(:vol, options_for_select(@volunteers.collect{ |v| [ v.name, v.id] }, @volunteer.id)) %>
 <%= submit_tag 'set'%>  Number of 2 hour shifts for <%=@volunteer.name%>: <%=@n_shifts%> 
 <% end %>

@@ -3,7 +3,7 @@
 <h3>Shifts assigned: <%=h @n_assigned %></h3>
 <h3>Status: <%=status(@schedule.year)%></h3>
 <%= debug(params) %>
-<% form_tag(:action => :assign) do  %>
+<%= form_tag(:action => :assign) do  %>
 <!--%= text_field_tag(:vo, params[:vo], :size=>3) %-->
 <%= select_tag(:vol, options_for_select(Volunteer.all.collect{ |v| [ v.name, v.id] }, @volunteer.id)) %>
 <%= submit_tag 'set'%>  Number of 2 hour shifts for <%=@volunteer.name%>: <%=@n_shifts%> 

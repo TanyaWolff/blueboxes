@@ -1,5 +1,5 @@
 
-<% form_for(:volunteer, :url =>{:action=>'update'}) do |form| %>
+<%= form_for(:volunteer, :url =>{:action=>'update'}) do |form| %>
 <table>	
 <tr><td>	Volunteer id: </td><td> <%=form.text_field("id") %></td></tr>
 <tr><td>	Picture id: </td><td> <%=form.text_field("picture_id") %></td></tr>

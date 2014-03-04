@@ -5,10 +5,6 @@
 Last updated: <%=h @sched2010.updated_at.strftime("%a %b %d %I%p") %>
 
 <p/>
-<!--% form_for @shift do |f| %-->
-<!--%=  select(:shift, "volunteer_id", Volunteer.find(:all).collect{ |v| [ v.name, v.id]}) %-->   
-<!--%= f.submit 'Update' %-->
-<!--% end %-->
 
 <% daycolor="red" %>
 <% daynames = ["THU","FRI", "SAT", "SUN","MON"] %>

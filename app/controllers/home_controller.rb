@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   
   def index
     
-     @count_2011 = Volunteer.find(:all, :conditions=>"tickets>0 and hat=='f'").size
+     @count_2011 = Volunteer.where("tickets>0 and hat=='f'").size
      @keycount= Signup.find_all_by_year(Date.today.year)
      @sleeps_2011 = Date.new(2011,7,29) - Date.today 
      @sleeps_2012 = Date.new(2012,8,3) - Date.today

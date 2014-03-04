@@ -1,7 +1,10 @@
 <h1>Editing signup</h1>
 
-<% form_for(@signup) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@signup) do |f| %>
+ <% @signup.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+   <% end %>
+
 
   <p>
     <%= f.label :volunteer_id %><br />
