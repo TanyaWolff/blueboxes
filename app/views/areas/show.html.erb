@@ -10,8 +10,12 @@
  </table>
 
 <table class="area" style="width:80%; border:1 solid blue;">
-<tr><td><%= link_to 'People', volunteers_path %></td><td><%= link_to 'Locations', locations_path %></td><td><%= link_to 'Schedules', schedules_path %></td></tr>
-<tr><td class="area"><%= pretty_list(@volunteers) %></td><td class="area"><%= pretty_list(@locations) %></td><td class="area"><%= pretty_list(@schedules) %></td></tr>
+<tr>
+<td><%= link_to 'People', volunteers_path %></td>
+<td><%= link_to 'Locations', locations_path %></td>
+<td><%= link_to 'Schedules', schedules_path %></td>
+</tr>
+<tr><%= pretty_list(@volunteers) %><%= pretty_list(@locations) %><%= pretty_list(@schedules) %></tr>
 
 
 
@@ -19,3 +23,4 @@
 <h1></h1>
 <%= link_to 'Edit', edit_area_path(@area) %> |
 <%= link_to 'Back', areas_path %>
+</div>

@@ -1,9 +1,9 @@
 module VolunteersHelper
 
 def signed_up(v)
+	return 'x'
 	thisyear=Date.today.year
-	#return !v.signups.find_all{|s| s.year==thisyear}.empty?
-	return !v.signups.where(year==thisyear).empty?
+	return !v.signups.where( :year => thisyear ).empty?
 end
 def su_disp(v)
 	return 1

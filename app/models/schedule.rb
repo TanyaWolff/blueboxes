@@ -6,14 +6,12 @@ class Schedule < ActiveRecord::Base
   #has_many :volunteers, :through=>:shifts
   #attr_accessor  :slots
   validates_presence_of :start, :area_id
+
+  after_create :create_shifts
  
  
   def self.add_shift(shift)
      @shifts << shift
-  end
-  def after_create
-	  self.shifts=create_shifts
-	  
   end
   
   def getshifttimes
@@ -43,7 +41,7 @@ class Schedule < ActiveRecord::Base
   protected
   # to be done after locations is set
   def create_shifts
-	  shifts=[]
+	  self.shifts=[]
 	  if self.locations.size==0
 		  self.locations=self.area.locations
 	  end
@@ -56,10 +54,9 @@ class Schedule < ActiveRecord::Base
         shift=Shift.new
         shift.location=l
         shift.start=t
-        shifts << shift
+        self.shifts << shift
       end
     end
-    shifts
   end
   
   

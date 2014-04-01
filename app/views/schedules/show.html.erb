@@ -1,46 +1,38 @@
-<div id="thetable">
+<div id="schedule">
+<h1> <%=h @schedule.title %> / <%=h status(@schedule.status) %> / Shifts assigned: <%=h @n_assigned %> <span class="buttons" ><%= button_to 'Assign Shifts', url_for(:action=> 'assign', :id=>@schedule.id), :method=>'get' if @schedule.status!=2 %></span></h1>
 
-<h1> <table width="100%"><tr><td><%=h @schedule.title %> </td><td><%=h status(@schedule.status) %> </td><td>Shifts assigned: <%=h @n_assigned %> </td><td style="text-align:right;"><span id="show"><%= button_to 'Assign Shifts', url_for(:action=> 'assign', :id=>@schedule.id), :method=>'get' if @schedule.status!=2 %></span></td></tr></table></h1>
-
-
-<h3> <table width="100%"><tr><td> Key view</td><td>Each row shows a key volunteer's shifts. </td>
-<td style="text-align:right;"><span id="show"><%= button_to 'Print', :controller => :schedules, :action => :print, :id => @schedule.id %>
-<%= button_to 'Save', :controller => :schedules, :action => :save, :id => 2 %></span></td>
-</tr></table></h3>
+<h3> Key view / Each row shows a key volunteer's shifts. <span class="buttons"><%= button_to 'Print', :controller => :schedules, :action => :print, :id => @schedule.id %>
+<%= button_to 'Save', :controller => :schedules, :action => :save, :id => 2 %></span>
+</h3>
 <p>  
   <%=h @schedule.description %>
 </p>
 
 
-
-
-
-<%=h @message %>
+<%= @message %>
  
  
  
  <!-- Each row is a volunteer -->
- <table border="1" ><th><%=h @schedule.year%></th>
-  <%=timeheader(@tms)%>
-   <% @ppl_sh_s.each do |k|  %>
- 
- <tr><%= vol_row(k,@ppl_sh[k],@tms)%></tr>
- 
-<% end %>
+ <table>
+	<%= timeheader(@tms)%>
+   	<% @ppl_sh_s.each do |k|  %>
+ 	<%= vol_row(k,@ppl_sh[k],@tms)%>
+	<% end %>
   </table>
  
  <!-- Each row is a timeslot -->
- <h3> <table width="100%"><tr><td> Hat view</td><td>Each row shows who's on that time </td>
-<td style="text-align:right;"><span id="show"><%= button_to 'Print', :controller => :schedules, :action => :print2, :id => @schedule.id %><%= button_to 'Save', :controller => :schedules, :action => :save2, :id => @schedule.id %></span></td>
-</tr></table></h3>
-<table border="1" >
-  <tr style="background-color: lightgreen;" > <td><%=h @schedule.year%></td> <% @locations.each do |l| %><th width="40"><%=l.name%></th><% end %> </tr>
+ <h3> Hat view / Each row shows who's on that time <span class="buttons"><%= button_to 'Print', :controller => :schedules, :action => :print2, :id => @schedule.id %><%= button_to 'Save', :controller => :schedules, :action => :save2, :id => @schedule.id %></span></h3>
+
+
+<table >
+  <tr class="locations" > <td><%=h @schedule.year%></td> <% @locations.each do |l| %><th width="40"><%=l.name%></th><% end %> </tr>
     <span class="sched-form-button" >
   <% @shift_days.keys.each do |d| %>  
-	<tr><th style="background-color: purple; color: white" colspan=<%=@x%>><%= @shift_days[d][0].start.strftime("%a, %b %d, %Y") %></th></tr>
+	<tr><th class="days" colspan=<%=@x%>><%= @shift_days[d][0].start.strftime("%a, %b %d, %Y") %></th></tr>
 	<% shift_hours=@shift_days[d].group_by{|x| x.start.hour} %>
 	<% shift_hours.keys.each do |t| %>
-		<tr> <th style="background-color: lightgreen;" ><%= shift_hours[t][0].start.strftime("%I %p")%></th>
+		<tr> <td class="times"><%= shift_hours[t][0].start.strftime("%l%p").downcase%></th>
 		<% shift_hours[t].each do |loc|%>
 		          <% name=' ' %>
 			  <% name=loc.volunteer.name if loc.volunteer%>
@@ -50,7 +42,8 @@
   <% end %>
   </table>
  
-</div>
 
 
 <%= link_to 'Back', schedules_path %>
+
+</div>

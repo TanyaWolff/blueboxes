@@ -64,7 +64,8 @@ p {
   font: small-caps 40px/40px "Arial", serif;
   color: #282;
   
-  background: url(../images/clouds.jpg) repeat-x;
+  /* background: url(../images/clouds.jpg) repeat-x; */
+  background: lightblue;
 }
 #sub-banner {
   
@@ -131,9 +132,6 @@ p {
  
   height:       100px;
 }
-#thetable {
-	font-family: arial;
-}
 #volunteer-show img {
  
   height:       250px;
@@ -149,6 +147,13 @@ p {
 }
 #assign td {
 	color: white;
+}
+#assign input {
+        
+	background-color:   white;
+	font-family: arial;
+	width: 100%;
+        
 }
 #slot .button-to input {
         
@@ -259,6 +264,11 @@ p {
    padding: 5px 5px;
    font-weight: bold;
    width: 100px;
+}
+.desc-button input button_to{
+	background-color: blue;
+	text-align:right;
+	
 }
 .sched-form-button input button_to{
 	background-color: orange;
@@ -527,7 +537,7 @@ color:red;text-align:center;font-weight:bold;font-size:14px;
 }
 #banner .depot-form fieldset {
   
-  margin-right: 5px;
+  margin-right: 25px;
   background: blue;
   opacity: 1;
   padding-bottom: 0px;
@@ -677,10 +687,101 @@ table td.area {
 }
 tr.area {
 vertical-align: top;
+    background: blue;
 }
 td.area {
 vertical-align: top;
 }
 table.area {
-vertical-align: top;
+	vertical-align: top;
 }
+#area table.areaclass {
+	vertical-align: top;
+	border: 1px none;
+	color: white;
+	background: transparent;
+	padding: 30px;
+}
+#area .areaclass  {
+color:white;text-align:center;font-weight:bold;font-size:14px;
+}
+#area .areaclass a {
+	display:block;
+	text-decoration:none; 
+	color:white;
+	font-family:arial;
+}
+#area .areaclass a:hover {
+	display:block;
+	text-decoration:none; 
+	color:red;
+}
+#area td .area_unselected {
+	vertical-align: top;
+	border: 10px outset lightgreen;
+	color: white;
+	background: blue;
+	padding: 30px;
+}
+#area td .area_selected {
+	vertical-align: top;
+	border: 10px inset lightgreen;
+	color: white;
+	background: darkblue;
+	padding: 30px;
+}
+#schedule table {
+	border-collapse: collapse;
+	border-width: 3px;
+	border-style: solid; 
+	border-color: lightblue;
+}
+#schedule td {
+	border-collapse: collapse;
+	border-width: 3px;
+	border-style: solid; 
+	border-color: lightblue;
+}
+#schedule table .desc {
+	border-style: none;
+}
+#schedule td .desc {
+	border-style: none;
+}
+#schedule .names {
+	border-collapse: collapse;
+	background-color: green;
+	color:white;
+}
+#schedule .times {
+	border-collapse: collapse;
+	background-color: lightgreen;
+	color:blue;
+}
+#schedule .days {
+	border-collapse: collapse;
+	background-color: darkblue;
+	color:white;
+}
+#schedule .locations {
+	border-collapse: collapse;
+	background-color: lightgreen;
+	color:darkblue;
+}
+#schedule {
+	font-family: arial;
+}
+span.buttons {
+	float:right;
+	font-weight:bold;
+	border-style:none;
+	text-align:right;
+}
+#buttons span {
+	float:right;
+	font-weight:bold;
+	border-style:none;
+	text-align:right;
+}
+#outer { width: 100% }
+#inner { width: 250px; margin: 0 auto; }

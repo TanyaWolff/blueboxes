@@ -14,12 +14,9 @@ class AreasController < ApplicationController
   # GET /areas/1.xml
   def show
     @area = Area.find(params[:id])
-     #@volunteers = @area.volunteers.map {|v| v.first_name.to_s+" "+v.last_name.to_s+"<br>"}
-     #@locations = @area.locations.map {|d| d.name.to_s+"<br>"}
-     #@schedules = @area.schedules.map {|s| s.title.to_s+" "+s.year.to_s+"<br>"}
-	 @volunteers = @area.volunteers.map {|v| v.first_name.to_s+" "+v.last_name.to_s+"\n"}.to_s
-     @locations = @area.locations.map {|d| d.name.to_s+"\n"}.to_s
-     @schedules = @area.schedules.map {|s| s.title.to_s+" "+s.year.to_s+"\n"}.to_s
+     @volunteers = @area.volunteers.select(:first_name).collect{|x| x.first_name}
+     @locations = @area.locations.select(:name).collect{|x|x.name}
+     @schedules = @area.schedules.select(:title).collect{|x|x.title}
     
     respond_to do |format|
       format.html # show.html.erb

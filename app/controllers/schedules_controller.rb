@@ -18,11 +18,10 @@ class SchedulesController < ApplicationController
   # GET /schedules/1.xml
   def show
 	@schedule = Schedule.find(params[:id])
-	if @schedule.start != @schedule.shifts[0].start then
-		#flash[:notice]="Warning: schedule starts at ", @schedule.start.to_s," but shifts start at ",@schedule.shifts[0].start.to_s
-	end
+	#if @schedule.start != @schedule.shifts[0].start then
+	#	#flash[:notice]="Warning: schedule starts at ", @schedule.start.to_s," but shifts start at ",@schedule.shifts[0].start.to_s
+	#end
 	@shift_days=@schedule.shifts.group_by{|x| x.start.day}
-	#@x=Location.count+1 # wrong... this gets all of them
 	@locations=Location.find_all_by_area_id(@schedule.area_id)
 	@x=@locations.size + 1
 	@n_assigned=0
@@ -157,6 +156,8 @@ class SchedulesController < ApplicationController
   # POST /schedules.xml
   def create
     @schedule = Schedule.new(params[:schedule])
+    @schedule.locations=Location.where( {area_id: @schedule.area })
+
 	
     respond_to do |format|
       if @schedule.save
@@ -218,11 +219,18 @@ class SchedulesController < ApplicationController
   #GET schedules/assign/1 for the volunteer to assign; POST for the table
 def assign
 	
-	#@schedule=Schedule.find_by_title(params[:schedule])
 	@schedule=Schedule.find(params[:id])
 	if @schedule.nil?
 		flash[:notice]="No schedule by the name: " && params[:schedule]
-		@schedule=Schedule.find(Schedule.all.size)
+		@schedule=Schedule.last
+		return
+	end
+	if @schedule.area.nil?
+		flash[:error]="No area set for the schedule"
+		return
+	end
+	if @schedule.area.volunteers.empty?
+		flash[:error]="No volunteers for this area. Please edit some volunteers."
 		return
 	end
 	if request.post?
@@ -232,44 +240,44 @@ def assign
 		@volunteer=nil if (@volunteer.area.nil?||(@volunteer.area.id != @schedule.area.id))
 	end	
 	
-	#@volunteers = @schedule.area.volunteers	
-	@volunteers=[]
+	@volunteers = @schedule.area.volunteers	
 	if @volunteer.nil? 
 		@volunteer=@schedule.area.volunteers[0]||Volunteer.find(2)
 	end
-	session[:update_vol]=@volunteer
-	@n_shifts=@volunteer.shifts.find_all{|x| x.schedule_id==@schedule.id}.size	
+	session[:update_vol]=@volunteer.id
+	@n_shifts=@volunteer.shifts.where(:schedule_id => @schedule.id).size	
 	
 	@shift_days=@schedule.shifts.group_by{|x| x.start.day}
-	#@x=Location.count+1 # wrong... this gets all of them
-	@locations=Location.find_all_by_area_id(@schedule.area_id)
+	@locations=Location.where(:area_id => @schedule.area_id)
 	@x=@locations.size + 1
-	#@n_assigned= @schedule.shifts.find(:all, :conditions=>'volunteer_id').size
-	@n_assigned= @schedule.shifts.where(:conditions=>'volunteer_id').size
+	@assigned_shifts = @schedule.shifts.where('volunteer_id')
+	@n_assigned= @assigned_shifts.size
 	#
 	# get signed up volunteers by year, get all volunteers in an area, find intersection. 
 	# That will be the list of volunteers for that schedule.
-	 vol_by_year=Signup.find_all_by_year(@schedule.year).map{|x| x.volunteer_id}
+	 vol_by_year=Signup.where(:year => @schedule.year).map{|x| x.volunteer_id}
 	 vol_by_area=@schedule.area.volunteers.map{|x| x.id}
-	 vols=vol_by_year & vol_by_area
+	# until we update Signup, set vols to be only the vols in the year, do not filter by year
+	 #vols=vol_by_year & vol_by_area
+	 vols=vol_by_area
 	#
 	# get all shifts assigned so far in a schedule and group by volunteer_id
-	 #assd=@schedule.shifts.find(:all, :conditions=>'volunteer_id').map{|x| [x.id, x.volunteer_id]}
-	 assd=@schedule.shifts.where(:conditions=>'volunteer_id').map{|x| [x.id, x.volunteer_id]}
+	 assd=@assigned_shifts.map{|x| [x.id, x.volunteer_id]}
 	 vol_shifts=assd.group_by{|a,b| b}
 	 vols.each do |v|
+		# add any volunteers that may be in the schedule but not in the area
 		 @volunteers << Volunteer.find(v)
 		 if !vol_shifts.keys.include?(v)
 			 vol_shifts[v] = []
 		 end
 	 end
-	 
+	
+	#filter out duplicates
+	@volunteers=@volunteers.uniq 
 	#
 	# combine available volunteers with their names and hours
 	#
-	#@vol_info=[[Volunteer.find(2), Volunteer.find(vols[4]).name, 13, Volunteer.find(34).restrictions]]
-	#@vol_info=vols.map{|x| [x,Volunteer.find(x).name,0, Volunteer.find(x).restrictions]}
-	 @vol_info=vols.map{|x| [x,Volunteer.find(x).name,vol_shifts[x].size||0, Volunteer.find(x).restrictions]}
+	@vol_info=vols.map{|x| [x,Volunteer.find(x).name,vol_shifts[x].size||0, Volunteer.find(x).restrictions]}
   end
   
   # called when assigning a shift by the button click

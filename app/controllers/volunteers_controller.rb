@@ -46,13 +46,13 @@ class VolunteersController < ApplicationController
   # GET /volunteers/1
   # GET /volunteers/1.xml
   def show
-	  
     @volunteer = Volunteer.find(params[:id])
-    if @volunteer.picture_id
-	@picture=Picture.find(@volunteer.picture_id)
-    else
+    
+    #if @volunteer.picture_id
+#	@picture=Picture.find(@volunteer.picture_id)
+ #   else
     	@picture=nil
-    end
+ #   end
     session[:edit_vol]=nil
     #n=@volunteer.last_name+@volunteer.id
     respond_to do |format|
@@ -113,7 +113,7 @@ class VolunteersController < ApplicationController
     end
     respond_to do |format|
       if @volunteer.update_attributes(params[:volunteer])
-	       expire_page :controller =>'gallery', :action => 'show', :id=>@volunteer.picture_id
+	       #expire_page :controller =>'gallery', :action => 'show', :id=>@volunteer.picture_id
 	       expire_action :controller => 'volunteers', :action => 'show', :id => params[:id]
 	      
 	       expire_action :action => 'index'

@@ -59,10 +59,15 @@ class AdminController < ApplicationController
   def index
     @nvolunteers=Volunteer.count
      @areas = Area.all
-    
-    @signups=Signup.find_all_by_year(2012).group_by{|v| v.volunteer.area_id}
-    @n_parking=@signups[1].size
-    @n_gate=@signups[2].size
+    @current_area= Area.find(session[:area]) if session[:area] || nil 
+    if @current_area.nil?
+    @current_name="None"
+    else
+    @current_name=@current_area.name
+    end
+    #@signups=Signup.find_all_by_year(2012).group_by{|v| v.volunteer.area_id}
+    #@n_parking=@signups[1].size
+    #@n_gate=@signups[2].size
 	
 	
   end

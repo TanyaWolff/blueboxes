@@ -1,21 +1,20 @@
 module SchedulesHelper
 
-def timeheader(tms)	
-	result=""
-	result+="<td colspan=3 style='background-color: green;color:white'>Thurs</td>
-	<td colspan=7 style='background-color: green;color:white'>Fri</td>
-	<td colspan=7 style='background-color: green;color:white'>Sat</td>
-	<td colspan=7 style='background-color: green;color:white'>Sun</td>
-	<td colspan=3 style='background-color: green;color:white'>Mon</td>"
-	result+="<tr><td/>"
-	tms.each do |t| 
-		result+="<td style='background-color: lightblue'>"
-		result+=t.strftime("%I %p")
-		result+="</td>"
-	end
-	result+="</tr>"
-	result
-end
+ def timeheader(tms)
+    @content = content_tag(:tr, class: "days") do
+	concat content_tag(:td, tms[0].year, class: "names")
+	concat "<td colspan='3'>Thurs</td>".html_safe
+	concat "<td colspan='7'>Fri</td>".html_safe
+	concat "<td colspan='7'>Sat</td>".html_safe
+	concat "<td colspan='7'>Sun</td>".html_safe
+	concat "<td colspan='3'>Mon</td>".html_safe
+    end
+    @content << "<tr><td></td>".html_safe
+    tms.each do |t|
+	@content << content_tag(:td, t.strftime("%l%p").downcase, class: "times") 
+    end
+    @content
+ end
  def status(y)
 	 return "draft" if y==0
 	 return "review" if y==1
@@ -27,11 +26,8 @@ end
 	 return "nil" 
 	 end
 	name=v.name
-	 result=""
-	 result+="<td style='background-color:lightgreen;'>"
-	result+=name 
-	result+="</td>"
-	result
+	@content = "<tr>".html_safe
+	@content << content_tag(:td, name, class: "sched")
 
 	i=0
 	if shfs==nil
@@ -40,19 +36,20 @@ end
 	
 	 shfs.each do |k| 
 		 while tms[i] < k.start && i <tms.size-1
-				result+="<td></td>"
+				@content << "<td></td>".html_safe
 				i+=1
 		end
-		result+="<td>"+k.location.name+"</td>"	
+		@content << content_tag(:td, k.location.name)
 		i+=1
 	end
 	
 	while i<tms.size do
-		result+="<td></td>"
+		@content << content_tag(:td, '')
 		i+=1
 	end
 	
-	result
+	@content << "</tr>".html_safe
+	@content
 end
 def cell_color(sh)
 	

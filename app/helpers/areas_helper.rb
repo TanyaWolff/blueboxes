@@ -1,8 +1,10 @@
 module AreasHelper
-def pretty_list(l)
-return "<textarea rows=15 disabled=\"disabled\">" + l + "</textarea>"
-
-
+def pretty_list(list)
+	content_tag(:td, class: "area") do
+		list.each do |n|
+			concat content_tag(:li, n) 
+		end
+	end
 end
 
 def profile(vid)

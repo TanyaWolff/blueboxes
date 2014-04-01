@@ -41,36 +41,34 @@
     
     <td><%=h volunteer.last_name %></td>
     <td><%=h volunteer.first_name %></td>
-     <td><%= ok_disp(signed_up(volunteer)) %></td>
-     <td><%=h volunteer.area.name if volunteer.area %></td>
+    <td><%= ok_disp(signed_up(volunteer)) %></td>
+    <td><%= volunteer.area.name if volunteer.area %></td>
     <td><%=h volunteer.hours %></td>
     <td><%=h volunteer.first_year_bs %></td>
     <td><%=h volunteer.first_year_key %></td>
     <td><%= ok_disp(volunteer.old_hat) %></td>
-     <% if !screen then %>
-    <td><%=h volunteer.tickets %></td>
-    <td><%=h volunteer.tix_students %></td>
-    <td><%=h volunteer.tix_kids %></td>
+    <% if !screen then %>
+      <td><%=h volunteer.tickets %></td>
+      <td><%=h volunteer.tix_students %></td>
+      <td><%=h volunteer.tix_kids %></td>
     <% end %>
     <% if volunteer.share ||!screen then%>
     
-    <td><%=h volunteer.email %></td>
-     <td><%=h volunteer.phone%>
+      <td><%=h volunteer.email %></td>
+      <td><%=h volunteer.phone%>
       <%=h volunteer.cell %></td>
       <td><%=h volunteer.address %></td>
-		<% if screen then %>
+	<% if screen then %>
 		<td><%=h truncate( volunteer.profile, :length =>20) %></td>
-		<% end %>
-       <% else %>
-     <td colspan="4"/>
-       
-   
-     <% end %>
-     <% if screen then %>
-     <td class="list-actions">
-     <dt><% if volunteer.share %> <%= link_to 'Show', volunteer %> <% end %></dt>
-    <dd><%= link_to 'Edit', edit_volunteer_path(volunteer) %></dd></td>
-  <% end %>
+	<% end %>
+    <% else %>
+      <td colspan="4"/>
+    <% end %>
+    <% if screen then %>
+     	<td class="list-actions">
+     	<dt><% if volunteer.share %> <%= link_to 'Show', volunteer %> <% end %></dt>
+    	<dd><%= link_to 'Edit', edit_volunteer_path(volunteer) %></dd></td>
+    <% end %>
   
   </tr>
 <% end %>

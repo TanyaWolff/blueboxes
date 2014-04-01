@@ -1,30 +1,28 @@
-<div id="pref">
-<h1>Enter your domain </h1>
-Currently in: <%=  (Area.find(session[:area]).name  if session[:area] )|| "Dragons Land"%> 
+<div id="area">
+<h1>Choose a domain </h1>
+Currently in: <%=  @current_name%> 
 
-<table align="center"> 
 
-<tr>
-  
+  <table align="center" class="areaclass" cellspacing="20">
+  <tr>
+
   <% @areas.each do |area| %>
-  <td>
-  <table class="areaclass">
-  <tr> <td  class="icon-image"><%= link_to  thumb(area), :action => :set_area, :id => area.id %></td></tr>
-   <tr><td><%=h area.name %></td></tr>
-    <tr><td><%=h @signups[area.id].size %> </td></tr>
-  </table>
-  </td>
+  <% if area == @current_area %>
+  <td ><%= link_to  area.name, {:action => :set_area, :id => area.id }, :class => "area_selected" %></td>
+  <% else %>
+  <td ><%= link_to  area.name, {:action => :set_area, :id => area.id }, :class =>"area_unselected"  %></td>
   <% end %>
-  <td>
-  <table>
-  <tr> <td  class="area-image"><%= link_to image_tag('people.jpg'),  :controller => 'admin', :action => 'unset_area' %></td></tr>
-   <tr><td>Everybody</td></tr>
-    <tr><td><%=h Volunteer.count %> </td><td>Volunteers</td></tr>
-  </table>
-  </td>
-  
+  <% end %>
+  <% if @current_area.nil? %>
+  <td > <%= link_to 'All areas', { :controller => 'admin', :action => 'unset_area'}, :class => "area_selected" %></td>
+  <% else %>
+  <td > <%= link_to 'All areas', { :controller => 'admin', :action => 'unset_area'}, :class => "area_unselected" %></td>
+  <% end %>
+
   </tr>
 
-</table>
+  </table>
+
+  </table>
 	
 </div>

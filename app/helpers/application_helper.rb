@@ -18,6 +18,7 @@ def car_disp
 	image_tag(file)
 end
 def thumb (record)
+	return ""
 	if record.instance_of? Volunteer  then 
 		if record.picture_id then
 			p="uploads/"+Picture.find(record.picture_id).name

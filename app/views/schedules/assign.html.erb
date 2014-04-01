@@ -23,12 +23,8 @@
 		<% shift_hours[t].each do |loc|%>
 		          <% name=' ' %>
 			  <% name=loc.volunteer.name if loc.volunteer%>
-			    <% buttoncolor="red" if loc.volunteer==@volunteer%>
-			<td style="background-color:<%= cell_color(loc) %>;color: white;"><span id="slot" ><%=button_to name, :action=>'update_shift', :id=>loc, :vol=>@volunteer, :size=>'50%' %></span></td>
-	<% buttoncolor="black" %>
-     
+			<td><%=button_to name, :action=>'update_shift', :id=>loc.id, :vol=>@volunteer.id  %></td>
 		<%end%></tr>
-
 	<% end %>
   <% end %>
  
