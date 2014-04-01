@@ -6,7 +6,6 @@ class VolunteersController < ApplicationController
   # GET /volunteers.xml
   def index
 	 if session[:area]
-		#@volunteers = Volunteer.find_all_by_area_id(session[:area], :order => 'hat desc, key desc, last_name')
 		@volunteers = Volunteer.where(:area_id => session[:area]).order('hat desc, key desc, last_name')
 		#v=Signup.find_all_by_year(2012).map{|s| s.volunteer}.sort_by{|x| x.last_name}.uniq
 		#@volunteers=v.group_by{|a| a.area_id}[session[:area]]
@@ -24,12 +23,16 @@ class VolunteersController < ApplicationController
     end
   end
   def email
-@emails='nobody here'
-	 if session[:area]
-	  #@emails=Volunteer.find_all_by_area_id(session[:area]).map{|v| v.email+", " if v.email}
-	@emails=Schedule.find_last_by_area_id(session[:area]).shifts.where(:conditions=>'volunteer_id').map{|v| v.volunteer}.uniq.map{|v| v.email+", " if v.email}
+	@emails='nobody here'
+	if session[:area]
+	s=Schedule.where(area_id: session[:area]).last
+		if s
+		@emails=s.shifts.where('volunteer_id').uniq.map{|s| s.volunteer.email} - [""]
+		else
+		@emails=Volunteer.where(area_id: session[:area]).map{|v| v.email} - [""]
+		end
 	else
-	@emails=Volunteer.all.map{|v| v.email+", " if v.email}
+	@emails=Volunteer.all.map{|v| v.email} - [""]
 	end
   end
  

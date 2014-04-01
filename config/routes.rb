@@ -7,11 +7,11 @@ Blueboxes::Application.routes.draw do
   resources :schedules
   resources :locations
   resources :shifts
+  get 'volunteers/email' => 'volunteers#email'
   resources :volunteers
   get 'prefs' => 'prefs#index'
-  get 'volunteers/email' => 'volunteers#email'
   get 'volunteers/prefs' => 'volunteers#prefs'
-  match 'volunteers/edit_pw' => 'volunteers#edit_pw'
+  match 'volunteers/edit_pw/:id' => 'volunteers#edit_pw'
   match 'volunteers/print_list' => 'volunteers#print_list'
   match 'home/set_vol/:id/:schedule' => 'home#set_vol'
   get 'home/slotPerson2' => 'home#slotPerson2'

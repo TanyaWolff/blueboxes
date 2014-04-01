@@ -24,7 +24,7 @@ class AdminController < ApplicationController
       session[:isHat]=false
       session[:update_vol] =nil
       flash[:notice]="Logged out"
-      redirect_to(:controller=>'home',:action=>'index')
+      redirect_to(:controller=>'admin',:action=>'login')
   end
  def bkup
 	 @d= Date.today.to_s

@@ -45,10 +45,10 @@
      
 	<% if  session[:volunteer_id] then%>|
 		<%= link_to 'Profile', :controller=>'volunteers', :action=>'show', :id => session[:volunteer_id] %>|	
-		<%= link_to 'Passw', :controller=>'volunteers', :action=>'edit_pw',:id=>session[:volunteer_id]  %>|		
+		<%= link_to 'Passw', {controller:'volunteers', action:'edit_pw', id: session[:volunteer_id]}  %>|		
 		<%= link_to 'Gallery', :controller=>'gallery'%>|
 		<%= link_to 'Volunteers', volunteers_path %>|
-		<%= link_to 'Emails', :controller=>'volunteers', :action=>'email' %>|
+		<%= link_to 'Emails', {controller: 'volunteers', action: 'email' } %>|
           
 		<% if session[:isHat] then%>|
 		<span class="admin-box" style="color:yellow;font-weight:bold">
