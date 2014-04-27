@@ -9,8 +9,8 @@
   
 </head>
 <body id="body">
-<div id="banner">
-<table style="width:100%;"><tr><td>
+<div id="banner" class="rainbow1">
+<table style="width:100%;"><tr><td class="shadow">
   <%= @page_title || "BlueBoxes for Blue Skies" %>
   </td><td style="text-align:right;">
   <span class="depot-form">
@@ -74,8 +74,6 @@
 	<p style="color: red;font-size:14pt;font-weight:bold;"><%= flash[:error] %></p>
     <%= yield :layout %>
   </div>
-<div id="rside">
-</div>
 </div>
 
 

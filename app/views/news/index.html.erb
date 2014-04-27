@@ -1,13 +1,12 @@
-<div id="home">
-<h1>
+<div id="news">
+<h2>News</h2>
 <table><tr><td>
-The time has come, the Walrus said, To talk of many things: <br/>
-Of shoes and ships and sealing wax, and Blue Skies!<br/>
-</td><td><p style="text-align:right"><span class="b"> Only <%=sleeps%> more sleeps until BLUE SKIES!</span></td></tr></table>
-</h1>
+<p>Here are the updates to the schedule after the draft is complete.
+If you'd like to switch any of your shifts you can post a request here so that others can offer their shift, saving the bottleneck at the hats.
+Please post any other comments here too.</p>
+</td><td><p style="text-align:right"><span class="fontb"> Only <%=@sleeps%> more sleeps until BLUE SKIES!</span></td></tr></table>
 
 <div id="pref">
-<% sh="link_to 'Show', c" %>
 <table>
 <% if session[:volunteer_id] %>
 <tr class="<%= cycle('list-line-even', 'list-line-odd') %>">
@@ -19,7 +18,7 @@ Of shoes and ships and sealing wax, and Blue Skies!<br/>
     </td>        
     <td><%= @volunteer.name if @volunteer %></td>
     <!--% form_tag(:url=>{:action=>:new_entry}) do %--> 
-    <%= form_for :comment, @comment, :url=>{:action=>:new_entry} do |f| %> 
+    <%= form_for @comment, :url=>{:action=>:new_entry} do |f| %> 
     <td><%= f.text_area :entry, :size => "80x5" %><span class="pref-form-button" align="top" ><%= submit_tag 'Post' %></span></td>
     <% f.hidden_field :volunteer_id %>
     

@@ -1,23 +1,14 @@
 <div id="volunteer-show">
-<h1><%=h @volunteer.first_name %>&nbsp;<%=h @volunteer.last_name %></h1>
+<h1>Profile for <%= @volunteer.first_name %>&nbsp;<%=h @volunteer.last_name %></h1>
+<table class="show centertable" style="width:300px;">
+<tr>
 
-<table >
-<tr style="valign:top;"><td >
-<%=portrait(@picture)%>
-</td>
-
-<td valign="top">
-<b>Hat Area:</b>  <%=h @volunteer.area.name if @volunteer.area %><br>
-  <b>Profile:</b>  <%=h @volunteer.profile %><br>
-  <b>Display/Login:</b  <%=h @volunteer.name %>
+<td>
+<b>Hat Area</b>  <%=h @volunteer.area.name if @volunteer.area %><br>
+  <b>ID</b  <%=h @volunteer.name %>
 </td>
 </tr>
 
-</table>
-<div class="pref-form" style="font-size:small">
-<div id="pref" style="font-size:smaller">
-<div id="lefthalf">
-<table class="show" style="width:300px;">
 <tr class="list-line-head"><th colspan="2">Personal Info</th></tr>
 
 <tr><th>Email</th><td><%=h @volunteer.email %></td></tr>
@@ -37,10 +28,6 @@
 <tr><th>Friday PM</th><td><%=h @volunteer.friday_pm%></td></tr>
 <tr><th>Monday AM</th><td><%=h @volunteer.monday_am %></td></tr>
 <tr><th>Monday PM</th><td><%=h @volunteer.monday_pm %></td></tr>
-</table>
-</div>
-<div id="righthalf">
-<table class="show">
 <tr class="list-line-head"><th colspan="2">Preferences</th></tr>
 <tr><th>Hours</th><td><%=h @volunteer.hours %></td></tr>
 <tr><th>Shift Length</th><td><%=h @volunteer.shiftlength %></td></tr>
@@ -53,9 +40,6 @@
 <tr><th>Best spot</th><td><%=loc_disp(@volunteer.best_loc) %></td></tr>
 <tr><th>Worst spot</th><td><%=loc_disp(@volunteer.worst_loc)%></td></tr>
 </table>
-</div>
-</div>
-</div>
 <div style="clear:both"></div>
 
 

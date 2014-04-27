@@ -1,8 +1,33 @@
 /* Global styles */
 
 /* START:notice */
-
-
+/*
+*/
+/* rainbow bokeh by Auke Zwart */
+.rainbow {
+background: 
+radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.15) 30%, rgba(255,255,255,.3) 32%, rgba(255,255,255,0) 33%) 0 0,
+radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.3) 13%, rgba(255,255,255,0) 14%) 0 0,
+radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 17%, rgba(255,255,255,.43) 19%, rgba(255,255,255,0) 20%) 0 110px,
+radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) -130px -170px,
+radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.2) 11%, rgba(255,255,255,.4) 13%, rgba(255,255,255,0) 14%) 130px 370px,
+radial-gradient(rgba(255,255,255,0) 0, rgba(255,255,255,.1) 11%, rgba(255,255,255,.2) 13%, rgba(255,255,255,0) 14%) 0 0,
+linear-gradient(45deg, #343702 0%, #184500 20%, #187546 30%, #006782 40%, #0b1284 50%, #760ea1 60%, #83096e 70%, #840b2a 80%, #b13e12 90%, #e27412 100%);
+background-size: 470px 470px, 970px 970px, 410px 410px, 610px 610px, 530px 530px, 730px 730px, 100% 100%;
+background-color: #840b2a;
+}
+.rainbow1 {
+background: 
+linear-gradient(45deg, white 0%, #4000FF 20%, #A9D0F5 30%, #006782 40%, #0b1284 50%, #760ea1 60%, #81BEF7 70%, #CEE3F6 80%, #5882FA 90%, #0B0B61 100%);
+background-size: 100% 100%;
+background-color: none;
+}
+.rainbow2 {
+background: 
+linear-gradient(45deg, white 0%, #006782 30%, #0b1284 50%, #81BEF7 70%, #0B0B61 100%);
+background-size: 100% 100%;
+background-color: none;
+}
 #notice {
   border: 2px solid red;
   padding: 1em;
@@ -12,12 +37,20 @@
 }
 /* END:notice */
 
+.fonta  { color: orange; }
+.fontb  { color: red; background: transparent; }
+.fontc  { color: purple; }
+.fontd  { color: lightgreen; }
+.fonte  { color: lightblue; }
+.fontw  { color: white; }
 
+p { font-family: arial; }
 
 h1 {
+	margin-top: -10px;
         font:  150% sans-serif;
         color: #226;
-        border-bottom: 3px dotted #77d;
+/*        border-bottom: 3px dotted #77d; */
 		padding-left: 10px;
 }
 h2 {
@@ -26,11 +59,18 @@ h2 {
         
 }
 
-A:hover {
+.no-touch A:hover {
 	text-decoration: underline; color:red;
 }
 A:active {
 	text-decoration: underline; overline; color:red
+}
+.list-line-even {
+  background:   lightblue;
+}
+
+.list-line-odd {
+  background:   lightgreen;
 }
 
 
@@ -41,6 +81,7 @@ A:active {
 	
 }
 p {
+	font: sans-serif;
 	color: black;
 }
 
@@ -48,10 +89,8 @@ p {
 /* START:mainlayout */
 /* Styles for main page */
 #columns {
-	 #background: url("../images/notes.jpg") repeat;
-	#background-color: #ffff99;
+	background-color: #ffffee;
 	
-     margin: 0;
         margin-left: auto;
         margin-right: auto;
 
@@ -65,7 +104,13 @@ p {
   color: #282;
   
   /* background: url(../images/clouds.jpg) repeat-x; */
-  background: lightblue;
+background: 
+linear-gradient(45deg, white 0%, #4000FF 20%, #A9D0F5 30%, #006782 40%, #0b1284 50%, #760ea1 60%, #81BEF7 70%, #CEE3F6 80%, #5882FA 90%, #0B0B61 100%);
+background-size: 100% 100%;
+background-color: none;
+}
+.shadow {
+text-shadow:2px 2px #FFFFFF;
 }
 #sub-banner {
   
@@ -112,15 +157,18 @@ p {
 }
 #sub-banner .admin-box {
 	opacity:1;
-	background: darkblue;
+	background: red;
+	color: black;
+	a: darkblue;
 }
 #main {
-	 float: left;
+ float: left;
   width: 100%;
-  #padding: 10px;
+  padding: 0px;
   #padding-right: 10px;
   font-size: small;
   background: #ffff99;
+  margin: 0px auto;
 
 }
 #main p{
@@ -131,10 +179,6 @@ p {
 #main img {
  
   height:       100px;
-}
-#volunteer-show img {
- 
-  height:       250px;
 }
 #show .button-to input {
         
@@ -163,9 +207,6 @@ p {
 	width: 50px;
     font-color: white;
         
-}
-#volunteer-show .show .list-line-head {
-  background:   orange;
 }
 #rside {
 	 float: left;
@@ -362,6 +403,16 @@ p {
  background:transparent;
 padding: 3;
 }
+.centertable {
+	text-align: center;
+	font: bold 14px arial;
+	color:white;
+	margin: 0px auto; 
+	padding: 30px;
+}
+.centertable a {
+	text-decoration:none; 
+}
 #pref .areaclass  {
 color:red;text-align:center;font-weight:bold;font-size:14px;
 }
@@ -392,20 +443,10 @@ color:red;text-align:center;font-weight:bold;font-size:14px;
 #main .button-to input {
   
 	font-family: arial;
-	 
 	width: 75px;
         color: darkblue;
         
 }
-
-
-
-#body {
-  #background: url("../images/notes.jpg") repeat;
-  margin:0;
-}
-
-
 
 #current {
   background:orange;
@@ -492,35 +533,28 @@ color:red;text-align:center;font-weight:bold;font-size:14px;
   border-style: solid;
   
 }
-#volunteer-show table {
-  font-family: sans-serif;
+#volunteer-show {
+	text-align: center;
+	margin: 0px auto;
 }
 
-#volunteer-show .show th {
+#volunteer-show .show {
+  font: small sans-serif;
   text-align: left;
+  color: darkblue;
 
 }
 
-
-
-
-
-/* START:cartmain */
-/* Styles for the cart in the main page */
-
-.cart-title {
-  font: 120% bold;
+#volunteer-show img {
+	display: none;
+ 
+  height:       250px;
+}
+#volunteer-show .show .list-line-head {
+  background:   lightblue;
 }
 
-.item-price, .total-line {
-  text-align: right;
-}
 
-.total-line .total-cell {
-  font-weight: bold;
-  border-top: 1px solid #595;
-}
-/* END:cartmain */
 
 
 /* START:form */
@@ -701,20 +735,10 @@ table.area {
 	color: white;
 	background: transparent;
 	padding: 30px;
+	align:center;
 }
 #area .areaclass  {
 color:white;text-align:center;font-weight:bold;font-size:14px;
-}
-#area .areaclass a {
-	display:block;
-	text-decoration:none; 
-	color:white;
-	font-family:arial;
-}
-#area .areaclass a:hover {
-	display:block;
-	text-decoration:none; 
-	color:red;
 }
 #area td .area_unselected {
 	vertical-align: top;
@@ -785,3 +809,28 @@ span.buttons {
 }
 #outer { width: 100% }
 #inner { width: 250px; margin: 0 auto; }
+
+#news p {
+	font-family: arial;
+}
+#news .home-button {
+   background-color: red;
+   font-size: larger;
+   padding: 5px 5px;
+   font-weight: bold;
+   width: 100px;
+}
+
+#area h1 {
+	padding: 15px 5px;
+	font: bold 150% arial;
+	text-align: center;
+        border-bottom: none;
+	color: white;
+	}
+#area p {
+	font: bold large arial;
+	text-align: center;
+	align: center;
+	color: white;
+	}

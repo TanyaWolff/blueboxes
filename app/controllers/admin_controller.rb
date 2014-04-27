@@ -61,7 +61,7 @@ class AdminController < ApplicationController
      @areas = Area.all
     @current_area= Area.find(session[:area]) if session[:area] || nil 
     if @current_area.nil?
-    @current_name="None"
+    @current_name="All"
     else
     @current_name=@current_area.name
     end

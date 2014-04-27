@@ -1,9 +1,8 @@
-<div id="area">
-<h1>Choose a domain </h1>
-Currently in: <%=  @current_name%> 
+<div id="area" class="rainbow2">
+<h1>Domains</h1>
 
 
-  <table align="center" class="areaclass" cellspacing="20">
+  <table class="centertable" cellspacing="20">
   <tr>
 
   <% @areas.each do |area| %>
@@ -22,7 +21,8 @@ Currently in: <%=  @current_name%>
   </tr>
 
   </table>
-
-  </table>
+<p>
+Current: <%=  @current_name%> 
+<p>
 	
 </div>

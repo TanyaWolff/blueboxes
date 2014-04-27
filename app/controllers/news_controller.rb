@@ -5,8 +5,7 @@ class NewsController < ApplicationController
       @volunteer=Volunteer.find(session[:volunteer_id])
     end
     @comment = Comment.new
-      @sleeps_2011 = Date.new(2011,7,29) - Date.today 
-      @sleeps_2012 = Date.new(2012,8,3) - Date.today 
+      @sleeps = (Date.new(2014,8,1) - Date.today).to_i
   end
   def new_entry
       @volunteer=Volunteer.find(session[:volunteer_id])
