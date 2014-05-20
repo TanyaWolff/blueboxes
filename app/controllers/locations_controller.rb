@@ -94,28 +94,16 @@ class LocationsController < ApplicationController
     def create_shifts_for_location
       
       @shifttimes=getshifttimes
-      @sched2010=Schedule.find_by_title("Parking2010")
-      @shifttimes.each do |t|
-        shift=Shift.new
-        shift.location=@location
-        shift.start=t
-        @sched2010.shifts << shift
+      @scheds_with_loc=Schedule.where(:area_id => @location.area)
+      @scheds_with_loc.each do |sch|
+	      @shifttimes.each do |t|
+		shift=Shift.new
+		shift.location=@location
+		shift.start=t
+		sch.shifts << shift
+	      end
+	      sch.save
       end
-      @sched2010.save
     end
     
-    
- 
-
-  def find_schedule
-    @sched2010=Schedule.find_by_title("Parking2010")
-    if @sched2010 == nil then
-      @sched2010 = Schedule.new
-      @sched2010.title = "Parking2010"
-      @sched2010.save
-      create_shifts_for_location
-    end
-    @sched2010
-  end
-
 end
