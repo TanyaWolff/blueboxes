@@ -17,8 +17,10 @@ background-size: 470px 470px, 970px 970px, 410px 410px, 610px 610px, 530px 530px
 background-color: #840b2a;
 }
 .rainbow1 {
-background: 
-linear-gradient(45deg, white 0%, #4000FF 20%, #A9D0F5 30%, #006782 40%, #0b1284 50%, #760ea1 60%, #81BEF7 70%, #CEE3F6 80%, #5882FA 90%, #0B0B61 100%);
+/* bkgd w/outdated webkit gradient */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#de2785), color-stop(50%,#f954b1), color-stop(100%,#de2785));
+/* bkgd w/standards gradient */
+background: linear-gradient(45deg, white 0%, #4000FF 20%, #A9D0F5 30%, #006782 40%, #0b1284 50%, #760ea1 60%, #81BEF7 70%, #CEE3F6 80%, #5882FA 90%, #0B0B61 100%);
 background-size: 100% 100%;
 background-color: none;
 }
@@ -119,8 +121,67 @@ text-shadow:2px 2px #FFFFFF;
   border-bottom: 2px solid;
   font: small-caps 11px/11px "Arial", serif;
   color: #282;
-  background: white;
-  opacity:.7;
+  background: #cccccc;
+	position:relative;
+}
+.menu_class {
+    	border:1px solid #1c1c1c;
+	text-transform:uppercase;
+ 	position:relative;
+}
+.menu_class ul {
+    	padding: 0px 5px; 
+	margin:0px;
+	height:20px;
+}
+.menu_class li.user {
+	float:right;
+}
+.menu_class li {
+	float:left;
+	list-style-type:none;
+	margin: 0px;
+    	padding:5px; 
+	text-decoration:none;
+
+}
+.menu_class li a {
+	text-decoration:none;
+}
+.menu_class li ul {
+    	padding:0px; 
+	margin:0px;
+	height:auto;
+	width:auto;
+}
+.menu_class ul.dropmenu {
+	display:none;
+    	padding:0px; 
+	margin:0px;
+	background:lightblue;
+	text-decoration:none;
+	text-align:left;
+	list-style-type:list;
+}
+.menu_class li:hover {
+	background:orange;
+ 	cursor:pointer;
+	
+}
+.menu_class li:hover ul.dropmenu {
+	display:block;
+	position:absolute;
+	float:none;
+    	padding:0px; 
+    	margin:0px; 
+}
+.menu_class li:hover ul.dropmenu li{
+	clear:left;
+		
+}
+.menu_class li:hover ul.dropmenu li a {
+	text-decoration: none;
+		
 }
 #banner img {
   float: left;
@@ -165,9 +226,8 @@ text-shadow:2px 2px #FFFFFF;
  float: left;
   width: 100%;
   padding: 0px;
-  #padding-right: 10px;
   font-size: small;
-  background: #ffff99;
+  background: #ffffff; /*was #ffff99;*/
   margin: 0px auto;
 
 }
@@ -614,7 +674,7 @@ color:red;text-align:center;font-weight:bold;font-size:14px;
   
   margin-right: 5px;
   background: url('../images/clouds.jpg') repeat;
-  opacity: 1;
+  opacity:1;
   padding-bottom: 0px;
   padding-left: 5px;
   

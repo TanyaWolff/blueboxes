@@ -36,37 +36,67 @@
   </span>
 </td></tr>
 </table>
-<div id="sub-banner">
-	<%= link_to 'Home', :controller=>'areas'%>|
-    <%= link_to 'ParkingSchedule', :controller=>'schedules', :action=>'index' %>|
-	<%= link_to 'GateSchedule', :controller=>'schedules', :action=>'index' %>|
-    <%= link_to 'Domain', :controller=>'admin', :action=>'index' %>|
+<div id="sub-banner" class="menu_class">
+<ul>
+  <li>
+	<%= link_to 'Home', :controller=>'areas'%>
+  </li>
+  <li> Schedules 
+	<ul class="dropmenu">
+	<li>
+    	  <%= link_to 'Parking', :controller=>'schedules', :action=>'index' %>
+	</li>
+	<li>
+    	  <%= link_to 'Gate', :controller=>'schedules', :action=>'index' %>
+	</li>
+	</ul>
+  </li>
+  <li>
+    <%= link_to 'Domains', :controller=>'admin', :action=>'index' %>
+  </li>
      
      
-	<% if  session[:volunteer_id] then%>|
-		<%= link_to 'Profile', :controller=>'volunteers', :action=>'show', :id => session[:volunteer_id] %>|	
-		<%= link_to 'Passw', {controller:'volunteers', action:'edit_pw', id: session[:volunteer_id]}  %>|		
-		<%= link_to 'Gallery', :controller=>'gallery'%>|
-		<%= link_to 'Volunteers', volunteers_path %>|
-		<%= link_to 'Emails', {controller: 'volunteers', action: 'email' } %>|
+	<% if  session[:volunteer_id] then%>
+<li>
+		<%= link_to 'Profile', :controller=>'volunteers', :action=>'show', :id => session[:volunteer_id] %>
+</li>
+<li>
+		<%= link_to 'Passw', {controller:'volunteers', action:'edit_pw', id: session[:volunteer_id]}  %>	
+</li>
+<li>
+		<%= link_to 'Volunteers', volunteers_path %>
+</li>
+<li>
+		<%= link_to 'Emails', {controller: 'volunteers', action: 'email' } %>
+</li>
           
-		<% if session[:isHat] then%>|
-		<span class="admin-box" style="color:yellow;font-weight:bold">
-			Admin Zone:
+	<% end %>
+		<% if session[:isHat] then%>
+<li>
+			Admin
 	     
-		<%= link_to 'Hat Areas', areas_path %>|
-		<%= link_to 'Locations', locations_path %>|
-		<%= link_to 'Schedules', schedules_path %>|
+<ul class="dropmenu">
+<li>
+		<%= link_to 'Hat Areas', areas_path %>
+</li>
+<li>
+		<%= link_to 'Locations', locations_path %>
+</li>
+<li>
+		<%= link_to 'Schedules', schedules_path %>
+</li>
+<li>
 		<%= link_to 'Stats', :controller=>'admin', :action=>'stats' %>
+</li>
+</ul>
+</li>
         
-		</span>
 		<% end %>
 	     
-	<% end %>
     
+
   </div>
 </div>
-
 <div id="columns">
   
   <div id="main">
