@@ -30,7 +30,7 @@ c) Create new locations for the area, and assign the area to each location
 d) Create new schedule with begin and end dates (July 31, 2014 - Aug 4, 2014), Name, Area, then save.
 
 
-# Notes
+## Notes
 =======
 db:create creates the database
 db:drop deletes the database
@@ -54,28 +54,28 @@ The Gemfile has the versions of the packages you need.
 Prerequisite: Install rvm and the ruby interpreter
 
 Switch to desired ruby version and create a gemset. The rails3 gemset is my stepping stone from 2.3.5 to 4.0
-# rvm list 
+$ rvm list 
 (list should include ruby-1.9.3-p484)
-# rvm use 1.9.3-p484
-# rvm gemset create rails3
+$ rvm use 1.9.3-p484
+$ rvm gemset create rails3
 
 Add bundler to install the gems and dependencies in the Gemfile.
-# gem install bundler -v '1.0.0'
-# bundle -v
+$ gem install bundler -v '1.0.0'
+$ bundle -v
 (shows I have 1.5.3)
 Go to your project directory where the Gemfile is located.
-# cd ~/blueboxes
-# bundle install --without production
+$ cd ~/blueboxes
+$ bundle install --without production
 (creates .bundle/config so that future calls to bundle install won't require --without production)
 Note you can alternatively add bundler to Gemfile, but I opted for the simplest
 Gemfile since adding dependencies upon dependencies grew a huge can of worms.
 
 Show versions of gems in environment:
-# rvm 1.9.3@rails3 do gem list
+$ rvm 1.9.3@rails3 do gem list
 list includes sqlite3 (1.3.8), sqlite3-ruby (1.3.3), rails (3.2.17)
 
-# always call rake within bundle context
-rvm exec rake
+Always call rake within bundle context
+$ rvm exec rake
 
 Gemfiles are nice!
 They allow different projects to run with different ruby versions. 
