@@ -250,7 +250,11 @@ text-shadow:2px 2px #FFFFFF;
         
 }
 #assign td {
+	
 	color: white;
+  border-width: 1px;
+  border-color: lightblue;
+  border-style: solid;
 }
 #assign input {
         
@@ -258,6 +262,11 @@ text-shadow:2px 2px #FFFFFF;
 	font-family: arial;
 	width: 100%;
         
+}
+#assign button {
+	border: none;
+	size: 100%;
+	background-color: white;
 }
 #slot .button-to input {
         

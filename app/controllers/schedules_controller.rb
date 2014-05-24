@@ -4,7 +4,8 @@ class SchedulesController < ApplicationController
 	#caches_page :show
   # GET /schedules
   # GET /schedules.xml
-  
+  attr_accessor :worker
+
   def index
     @schedules = Schedule.all
     
@@ -22,6 +23,7 @@ class SchedulesController < ApplicationController
 	#	#flash[:notice]="Warning: schedule starts at ", @schedule.start.to_s," but shifts start at ",@schedule.shifts[0].start.to_s
 	#end
 	@shift_days=@schedule.shifts.group_by{|x| x.start.day}
+	@shifts=@schedule.shifts.to_a.sort_by!{|x| [x.start, x.location]}
 	@locations=Location.find_all_by_area_id(@schedule.area_id)
 	@x=@locations.size + 1
 	@n_assigned=0
@@ -30,9 +32,7 @@ class SchedulesController < ApplicationController
 	@ppl_sh=@schedule.shifts.group_by{|v| v.volunteer}
 	@ppl_sh.delete(nil)
 	@ppl_sh_s=@ppl_sh.keys.sort_by{|x| [x.hat.to_s,x.name]}
-	#@pp=@ppl_sh.keys.collect{|v| [v.name, v.shifts] if v!=nil}
-	@tms=@schedule.getshifttimes
-     #@vgroups = @sched2010.shifts.group_by {|shift| shift.volunteer} 
+	@tms=@schedule.shifttimes
     respond_to do |format|
       format.html # show.html.erb 
      
@@ -57,9 +57,7 @@ class SchedulesController < ApplicationController
 	@ppl_sh=@schedule.shifts.group_by{|v| v.volunteer}
 	@ppl_sh.delete(nil)
 	@ppl_sh_s=@ppl_sh.keys.sort_by{|x| [x.hat.to_s,x.name]}
-	#@pp=@ppl_sh.keys.collect{|v| v if v!=nil}
-	@tms=@schedule.getshifttimes
-     #@vgroups = @sched2010.shifts.group_by {|shift| shift.volunteer} 
+	@tms=@schedule.shifttimes
 	 
 	 render(:layout => 'print')
  end
@@ -80,9 +78,7 @@ class SchedulesController < ApplicationController
 	@ppl_sh=@schedule.shifts.group_by{|v| v.volunteer}
 	@ppl_sh.delete(nil)
 	@ppl_sh_s=@ppl_sh.keys.sort_by{|x| [x.hat.to_s,x.name]}
-	#@pp=@ppl_sh.keys.collect{|v| v if v!=nil}
-	@tms=@schedule.getshifttimes
-     #@vgroups = @sched2010.shifts.group_by {|shift| shift.volunteer} 
+	@tms=@schedule.shifttimes
 	 
 	 render(:layout => 'print')
   end
@@ -102,11 +98,9 @@ class SchedulesController < ApplicationController
 	@ppl_sh=@schedule.shifts.group_by{|v| v.volunteer}
 	@ppl_sh.delete(nil)
 	@ppl_sh_s=@ppl_sh.keys.sort_by{|x| [x.hat.to_s,x.name]}
-	#@pp=@ppl_sh.keys.collect{|v| v if v!=nil}
-	@tms=@schedule.getshifttimes
-     #@vgroups = @sched2010.shifts.group_by {|shift| shift.volunteer} 
+	@tms=@schedule.shifttimes
 	 headers['Content-Type'] = "application/vnd.ms-excel"
-    headers['Content-Disposition'] = 'attachment; filename="BSParking2013-keys.xls"'
+    headers['Content-Disposition'] = 'attachment; filename="BSParking#{@schedule.year}-keys.xls"'
     headers['Cache-Control'] = ""
 
 	 render(:layout => 'print')
@@ -127,9 +121,7 @@ class SchedulesController < ApplicationController
 	@ppl_sh=@schedule.shifts.group_by{|v| v.volunteer}
 	@ppl_sh.delete(nil)
 	@ppl_sh_s=@ppl_sh.keys.sort_by{|x| [x.hat.to_s,x.name]}
-	#@pp=@ppl_sh.keys.collect{|v| v if v!=nil}
-	@tms=@schedule.getshifttimes
-     #@vgroups = @sched2010.shifts.group_by {|shift| shift.volunteer} 
+	@tms=@schedule.shifttimes
 	 headers['Content-Type'] = "application/vnd.ms-excel"
     headers['Content-Disposition'] = 'attachment; filename="BSParking2013-keys.xls"'
     headers['Cache-Control'] = ""
@@ -218,73 +210,151 @@ class SchedulesController < ApplicationController
   
   #GET schedules/assign/1 for the volunteer to assign; POST for the table
 def assign
-	
-	@schedule=Schedule.find(params[:id])
+	@id=params[:id]
+	@schedule=Schedule.find(@id)
 	if @schedule.nil?
 		flash[:notice]="No schedule by the name: " && params[:schedule]
 		@schedule=Schedule.last
 		return
 	end
-	if @schedule.area.nil?
+	@area=@schedule.area
+	if @area.nil?
 		flash[:error]="No area set for the schedule"
 		return
 	end
-	if @schedule.area.volunteers.empty?
+	@shifts=@schedule.shifts.to_a
+	@volunteers=@area.volunteers.to_a
+	if @volunteers.empty?
 		flash[:error]="No volunteers for this area. Please edit some volunteers."
 		return
 	end
+	taskData=session[:taskData]
+	if !taskData.nil?
+		worker=Worker.new(@id,session[:volunteer_id])
+		worker.tasks=taskData
+		worker.do_work
+		session[:taskData]=nil
+	
+	end
+	@pending=taskData
 	if request.post?
 		@volunteer = Volunteer.find(params[:vol])
 	else
 		@volunteer=Volunteer.find(session[:update_vol]) if session[:update_vol]
-		@volunteer=nil if (@volunteer.area.nil?||(@volunteer.area.id != @schedule.area.id))
+		varea=@volunteer.area
+		@volunteer=nil if (varea.nil?||(varea.id != @area.id))
 	end	
 	
-	@volunteers = @schedule.area.volunteers	
 	if @volunteer.nil? 
-		@volunteer=@schedule.area.volunteers[0]||Volunteer.find(2)
+		@volunteer=@volunteers[0]||Volunteer.find(2)
 	end
+	@vname=@volunteer.name
 	session[:update_vol]=@volunteer.id
-	@n_shifts=@volunteer.shifts.where(:schedule_id => @schedule.id).size	
+	@n_shifts=@volunteer.shifts.count(:conditions => 'schedule_id = @id')
 	
-	@shift_days=@schedule.shifts.group_by{|x| x.start.day}
+	@shift_days=@shifts.group_by{|x| x.start.day}
 	@locations=Location.where(:area_id => @schedule.area_id)
 	@x=@locations.size + 1
-	@assigned_shifts = @schedule.shifts.where('volunteer_id')
-	@n_assigned= @assigned_shifts.size
+	# count the total number of shifts assigned in the schedule
+	@assigned=Hash.new 0
+	vol_shifts=Hash.new []
+	puts "shift size *** "+@shifts.length.to_s
+	@shifts.each do |s|
+		v=s.volunteer_id
+		if !v.nil?
+		@assigned[v]+=1
+		vol_shifts[v] << s.id
+		end
+	end
+	puts "*****ASSIGNED*****"
+	@assigned.each do |k,v|
+		puts "* "+k.to_s() + " ** "+ v.to_s()
+		puts ""
+	end
+	
+	#@assigned_shifts = @shifts.where('volunteer_id')
+	#@n_assigned= @assigned_shifts.size
+	@n_assigned = @assigned.values.sum
 	#
 	# get signed up volunteers by year, get all volunteers in an area, find intersection. 
 	# That will be the list of volunteers for that schedule.
-	 vol_by_year=Signup.where(:year => @schedule.year).map{|x| x.volunteer_id}
-	 vol_by_area=@schedule.area.volunteers.map{|x| x.id}
+	# vol_by_year=Signup.where(:year => @schedule.year).map{|x| x.volunteer_id}
+	 vol_by_area=@area.volunteers.map{|x| x.id}
 	# until we update Signup, set vols to be only the vols in the year, do not filter by year
 	 #vols=vol_by_year & vol_by_area
 	 vols=vol_by_area
 	#
 	# get all shifts assigned so far in a schedule and group by volunteer_id
-	 assd=@assigned_shifts.map{|x| [x.id, x.volunteer_id]}
-	 vol_shifts=assd.group_by{|a,b| b}
-	 vols.each do |v|
+	 #assd=@assigned_shifts.map{|x| [x.id, x.volunteer_id]}
+	 #vol_shifts=assd.group_by{|a,b| b}
+	 #vols.each do |v|
 		# add any volunteers that may be in the schedule but not in the area
-		 @volunteers << Volunteer.find(v)
-		 if !vol_shifts.keys.include?(v)
-			 vol_shifts[v] = []
-		 end
-	 end
+	#	 @volunteers << Volunteer.find(v)
+	#	 if !vol_shifts.keys.include?(v)
+	#		 vol_shifts[v] = []
+	#	 end
+	# end
 	
 	#filter out duplicates
-	@volunteers=@volunteers.uniq 
+	#@volunteers=@volunteers.uniq 
+	@mergevols=(vol_by_area + vol_shifts.keys).uniq
 	#
 	# combine available volunteers with their names and hours
 	#
-	@vol_info=vols.map{|x| [x,Volunteer.find(x).name,vol_shifts[x].size||0, Volunteer.find(x).restrictions]}
+	@arvols=Volunteer.find(@mergevols)
+	@vol_info=@arvols.map{|i| [i.id, i.name, @assigned[i.id]||0, i.restrictions]}
+	@droplist=@arvols.map{|i| [i.name, i.id]}
   end
   
   # called when assigning a shift by the button click
   def update_shift
-    vol = Volunteer.find(params[:vol])
 	sh = Shift.find(params[:id])
+ 	@schedule=sh.schedule
+    	vol = Volunteer.find(params[:vol])
+
+	session[:work].tasks<<[params[:id],params[:vol]]
+	redirect_to :action => 'assign', :id => sh.schedule.id, :vol=> vol
+   end
 	
+# POST	
+   def do_work
+	sh = Shift.find(params[:id])
+    	vol = Volunteer.find(params[:vol])
+
+	worker=Worker.new(sh.schedule.id,session[:volunteer_id])
+	worker.tasks=session[:taskData]
+	if worker.tasks.nil? 
+		puts "In controller do_work action, but there's nothing to do"
+	else
+		puts "In controller do_work action. "+worker.tasks.to_s()
+		worker.do_work()
+	end
+	session[:taskData]=nil
+	redirect_to :action => 'assign', :id => sh.schedule.id, :vol=> vol
+   end
+   # post /schedules/do_jswork request comes from javascript buttons.js when
+   # user clicks the save/work button on the assign page
+   def do_jswork
+	@id=params[:id]
+	taskData = request.body.read
+	puts "In controller do_jswork: post data: "+taskData
+	worker=Worker.new(@id,session[:volunteer_id])
+	worker.tasks=taskData
+	if worker.tasks.nil? 
+		puts "In controller do_jswork action, but there's nothing to do"
+	else
+		puts "In controller do_jswork action. "+worker.tasks.to_s()
+		worker.do_work()
+	end
+	session[:taskData]=nil
+	puts "*** Parameters sent to assign from schedules/do_jswork:"
+	puts params.inspect
+	redirect_to :action => 'assign', :id => @id 
+   end
+=begin
+	sh = Shift.find(params[:id])
+ 	@schedule=sh.schedule
+    	vol = Volunteer.find(params[:vol])
 	dropped=""
 	added=""
 	if vol.nil? #case admin
@@ -323,15 +393,15 @@ def assign
 	sh.schedule.updated_at=Time.now
 	sh.schedule.save
 	if sh.schedule.status != 0 # log udpates if in review or final state but not draft
-		log=added + dropped+" "+sh.start.strftime("%a%I%p")+" at "+sh.location.name
+		log=added + dropped+" "+sh.start.localtime.strftime("%a%I%p")+" at "+sh.location.name
 		comment = Comment.new(:entry=>log,:volunteer_id=>session[:volunteer_id])
 		comment.save
 	end
 	expire_page :controller => 'schedules', :action => 'show', :id => sh.schedule.id
 	redirect_to :action => 'assign', :id => sh.schedule.id, :vol=> vol
 end
+=end
 
-# called from the 
 #GET schedules/1/duplicate
 def duplicate
 	   #flash[:notice] = params.keys << " values: " << params.values

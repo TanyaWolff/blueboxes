@@ -1,13 +1,14 @@
 module SchedulesHelper
 
  def timeheader(tms)
+    boxes=Schedule.slots_per_day
+    currentday=tms[0]
     @content = content_tag(:tr, class: "days") do
 	concat content_tag(:td, tms[0].year, class: "names")
-	concat "<td colspan='3'>Thurs</td>".html_safe
-	concat "<td colspan='7'>Fri</td>".html_safe
-	concat "<td colspan='7'>Sat</td>".html_safe
-	concat "<td colspan='7'>Sun</td>".html_safe
-	concat "<td colspan='3'>Mon</td>".html_safe
+ 	boxes.each do |b|
+	   concat "<td colspan='#{b.size}'>#{currentday.strftime("%a")}</td>".html_safe
+	   currentday=(currentday + 1.day)
+	end
     end
     @content << "<tr><td></td>".html_safe
     tms.each do |t|

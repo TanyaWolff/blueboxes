@@ -34,6 +34,8 @@ Blueboxes::Application.routes.draw do
   get 'schedules/save2/:id' => 'schedules#save2'
   get 'schedules/print2/:id' => 'schedules#print2'
   match 'schedules/update_shift/:id/:vol' => 'schedules#update_shift'
+  match 'schedules/do_work/:id' => 'schedules#do_work'
+  match 'schedules/do_jswork/:id' => 'schedules#do_jswork'
   match 'news' => 'news#index'
   match 'news/new_entry' => 'news#new_entry'
 
