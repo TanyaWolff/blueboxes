@@ -3,8 +3,6 @@ class Schedule < ActiveRecord::Base
   has_many :shifts, :dependent=>:destroy, :order=>"start, location_id"
   has_and_belongs_to_many :locations
   has_many :volunteers
-  #has_many :volunteers, :through=>:shifts
-  #attr_accessor  :slots
   validates_presence_of :start, :area_id
 
   after_create :create_shifts
@@ -13,6 +11,7 @@ class Schedule < ActiveRecord::Base
 
   attr_accessor :pending
 
+
   def self.slots_per_day
 	@@slots_per_day
   end 
@@ -20,7 +19,7 @@ class Schedule < ActiveRecord::Base
      @shifts << shift
   end
 
-  #attr_accessor :shifttimes
+  # sets both shifttimes and shifttimes_per_day which is similar to slots_per_day but tailored to the schedule. Eg Parking2013 schedule started at 2, not noon.
   def shifttimes
     if @shifttimes.nil?
 	setshifttimes
@@ -28,9 +27,31 @@ class Schedule < ActiveRecord::Base
     @shifttimes
   end
 
-  def setshifttimes
+  def shifttimes=
 	@shifttimes=[]
 	@@slots_per_day.each_with_index  do |d, i|
+	    n=(self.start+i).to_time
+	    d.each do |t|
+		    @shifttimes<< n+(t*3600)
+	    end
+	end
+  end   
+  def shifttimes_per_day
+    if @shifttimes_per_day.nil?
+	setshifttimes
+    end
+    @shifttimes_per_day
+  end
+  def shifttimes_per_day=(st)
+	@shifttimes_per_day=st
+  end
+  def setshifttimes
+	@shifttimes=[]
+	@shifttimes_per_day=@@slots_per_day
+ 	if self.year < 2014
+		@shifttimes_per_day[0]=[14,16,18]
+	end
+	@shifttimes_per_day.each_with_index  do |d, i|
 	    n=(self.start+i).to_time
 	    d.each do |t|
 		    @shifttimes<< n+(t*3600)

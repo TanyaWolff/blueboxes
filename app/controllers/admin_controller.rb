@@ -13,7 +13,7 @@ class AdminController < ApplicationController
       else
         flash[:notice] = "Invalid username/password "
 	  
-        redirect_to(:controller=>'home',:action=>'index')
+        redirect_to(:controller=>'admin',:action=>'login')
 
       end
     end

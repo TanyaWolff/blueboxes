@@ -21,6 +21,10 @@ module SchedulesHelper
 	 return "review" if y==1
 	 return "final" if y==2
  end
+ def utc(t)
+	return "y" if t.utc?
+	return "n"
+ end
  
  def vol_row(v,shfs,tms)
 	if v==nil
@@ -32,7 +36,7 @@ module SchedulesHelper
 
 	i=0
 	if shfs==nil
-	return #name+' has nil shifts'
+	return 
 	end
 	
 	 shfs.each do |k| 

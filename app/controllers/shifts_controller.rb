@@ -4,7 +4,7 @@ class ShiftsController < ApplicationController
   # GET /shifts.xml
   def index
     @shifts = Shift.all
-    @locations = {'Gate', 'P1', 'Inner', 'Performer'}
+    #@locations = {'Gate', 'P1', 'Inner', 'Performer'}
     #@shifts_at_P1 = Shift.find_shifts_at(Location.find_by_name("P1"))
     respond_to do |format|
       format.html # index.html.erb

@@ -24,7 +24,7 @@ class SchedulesController < ApplicationController
 	#end
 	@shift_days=@schedule.shifts.group_by{|x| x.start.day}
 	@shifts=@schedule.shifts.to_a.sort_by!{|x| [x.start, x.location]}
-	@locations=Location.find_all_by_area_id(@schedule.area_id)
+	@locations=Location.where(:area_id => @schedule.area_id)
 	@x=@locations.size + 1
 	@n_assigned=0
 	@schedule.shifts.each{|x| @n_assigned+=1 if x.volunteer}
@@ -33,6 +33,7 @@ class SchedulesController < ApplicationController
 	@ppl_sh.delete(nil)
 	@ppl_sh_s=@ppl_sh.keys.sort_by{|x| [x.hat.to_s,x.name]}
 	@tms=@schedule.shifttimes
+	puts "*****shifttimes: "+@schedule.shifttimes.to_s
     respond_to do |format|
       format.html # show.html.erb 
      
@@ -445,10 +446,22 @@ def duplicate
 	   @vols=[]
 	   @vols=@old.shifts.collect{|x| [x.id, x.volunteer_id]}
 	   oldshifts=@old.shifts
-	@schedule.shifts.each_with_index do |x,i| 
-		if oldshifts[i]
-		oldshifts[i].volunteer.add_shift(x) if oldshifts[i].volunteer
-		end
+	logger.debug("Copying shifts from old sched to new")
+	n_oldshifts=oldshifts.size
+	newshifts=@schedule.shifts
+	n_newshifts=newshifts.size
+	if oldshifts.size < newshifts.size
+		skip=n_newshifts-n_oldshifts
+		puts "***Skipping "+skip.to_s+" shifts"
+	end
+	volexists=oldshifts.map{|sh| sh.volunteer}
+	newshifts.each_with_index do |x,i| 
+		next if i < skip
+		#x.volunteer_id=oldshifts[i-skip].volunteer_id||nil
+		#if oldshifts[i]
+		#oldshifts[i].volunteer.add_shift(x) if oldshifts[i].volunteer
+		oldshifts[i-skip].volunteer.add_shift(x) if volexists[i-skip]
+		#end
 	end
 	@schedule.save
 	@n_assigned=0
