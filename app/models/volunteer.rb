@@ -33,16 +33,23 @@ class Volunteer < ActiveRecord::Base
   end
   # 0-no, 1-yes
   def sign_up=(su)
+	puts "=======SIGNING UP========"
 	  thisyear=Date.today.year
 	  @sign_up=su
 	  return if @sign_up=='0'
-	  s= self.signups.last
-	  if s.nil? || s.year!=thisyear then
-	  s=Signup.new(:volunteer_id=>self.id, :year=>thisyear)
-	 end
+	  #s= self.signups.last
+	  sall=self.signups
+	  #if s.nil? || s.year!=thisyear then
+	  if sall.empty? || sall.last.year!=thisyear then
+
+	  	s=Signup.new(:volunteer_id=>self.id, :year=>thisyear)
+	  else
+		s=sall.last
+	  end
 	  s.tix_ad=self.tickets
-	   s.tix_st=self.tix_students
-	    s.tix_ch=self.tix_kids
+	  s.tix_st=self.tix_students
+	  s.tix_ch=self.tix_kids
+	  s.early=self.early_entry
 	  s.save
 	  add_signup(s)
   end
@@ -54,6 +61,10 @@ class Volunteer < ActiveRecord::Base
   end
   def tix_ch
 	  @tix_ch
+  end
+  def early_entry
+	puts "******GETTING EARLY_ENTRY *********"
+	  @early_entry
   end
   
   def tix=(t)
@@ -76,6 +87,14 @@ class Volunteer < ActiveRecord::Base
 	  s=self.signups.last
 	  return if !s
 	  s.tix_ch=t
+	  s.save
+  end
+  def early_entry=(t)
+	puts "******SETTING EARLY_ENTRY *********"
+	  #self.early_entry=t
+	  s=self.signups.last
+	  return if !s
+	  s.early=t
 	  s.save
   end
   def availability=(av)

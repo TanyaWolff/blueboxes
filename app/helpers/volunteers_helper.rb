@@ -1,9 +1,16 @@
 module VolunteersHelper
 
 def signed_up(v)
-	return 'x'
+	return false if v.signups.empty?
 	thisyear=Date.today.year
-	return !v.signups.where( :year => thisyear ).empty?
+	return v.signups.last.year == thisyear
+end
+def thursday_list(v)
+	return false if v.signups.empty?
+	s=v.signups.last
+	thisyear=Date.today.year
+	return false if s.year != thisyear
+	return s.early
 end
 def su_disp(v)
 	return 1

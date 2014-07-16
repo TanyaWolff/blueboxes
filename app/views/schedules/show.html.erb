@@ -24,7 +24,7 @@
  <!-- Each row is a timeslot -->
  <h3> Hat view / Each row shows who's on that time <span class="buttons"><%= button_to 'Print', :controller => :schedules, :action => :print2, :id => @schedule.id %><%= button_to 'Save', :controller => :schedules, :action => :save2, :id => @schedule.id %></span></h3>
 
-
+<!--
 <table >
   <tr class="locations" > <td><%=h @schedule.year%></td> 
 	<% @locations.each do |l| %>
@@ -34,7 +34,7 @@
     <span class="sched-form-button" >
 <% shift=@shifts[0] %>
 <% i=0 %>
-  <% Schedule.slots_per_day.each do |d| %>  
+  <% @schedule.shifttimes_per_day.each do |d| %>  
 	<tr><th class="days" colspan=<%=@x%>><%= shift.start.localtime.strftime("%a %b %d, %Y") %></th></tr>
 	<% d.each do |t| %>
 		<tr> <td class="times"><%= @shifts[i].start.localtime.strftime("%l%p").downcase %></th>
@@ -48,6 +48,24 @@
 	<% end %>
   <% end %>
   </table>
+-->
+<table border="1" >
+  <tr class="locations" > <td/> <% @locations.each do |l| %><th width="40"><%=l.name%></th><% end %> </tr>
+  <% @shift_days.keys.each do |d| %>
+        <tr><th class="days" colspan=<%=@x%>><%= @shift_days[d][0].start.strftime("%a, %b %d, %Y") %></th></tr>
+        <% shift_hours=@shift_days[d].group_by{|x| x.start.hour} %>
+        <% shift_hours.keys.each do |t| %>
+                <tr> <th class="times" ><%= shift_hours[t][0].start.localtime.strftime("%I %p")%></th>
+                <% shift_hours[t].each do |loc|%>
+                          <% name=' ' %>
+                          <% name=loc.volunteer.name if loc.volunteer%>
+                          <% bname='button'+loc.id.to_s() %>
+                        <td><%= name %></td>
+                <%end%></tr>
+        <% end %>
+  <% end %>
+
+</table>
 
 
 <%= link_to 'Back', schedules_path %>

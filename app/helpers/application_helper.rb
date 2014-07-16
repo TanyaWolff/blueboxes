@@ -1,5 +1,10 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+def yes_or_no(b)
+  result=''
+  result='y' if b
+  result
+end
 def getGateScheduleId
   @gate_schedule_id=Schedule.all.collect{|s| s.id}.max
   end

@@ -279,11 +279,11 @@ def assign
 	#
 	# get signed up volunteers by year, get all volunteers in an area, find intersection. 
 	# That will be the list of volunteers for that schedule.
-	# vol_by_year=Signup.where(:year => @schedule.year).map{|x| x.volunteer_id}
+	 vol_by_year=Signup.where(:year => @schedule.year).map{|x| x.volunteer_id}
 	 vol_by_area=@area.volunteers.map{|x| x.id}
 	# until we update Signup, set vols to be only the vols in the year, do not filter by year
-	 #vols=vol_by_year & vol_by_area
-	 vols=vol_by_area
+	 vols=vol_by_year & vol_by_area
+	 #vols=vol_by_area
 	#
 	# get all shifts assigned so far in a schedule and group by volunteer_id
 	 #assd=@assigned_shifts.map{|x| [x.id, x.volunteer_id]}
@@ -298,12 +298,13 @@ def assign
 	
 	#filter out duplicates
 	#@volunteers=@volunteers.uniq 
-	@mergevols=(vol_by_area + vol_shifts.keys).uniq
+	#@mergevols=(vols + vol_shifts.keys).uniq
 	#
 	# combine available volunteers with their names and hours
 	#
-	@arvols=Volunteer.find(@mergevols)
-	@vol_info=@arvols.map{|i| [i.id, i.name, @assigned[i.id]||0, i.restrictions]}
+	#@arvols=Volunteer.find(@mergevols)
+	@arvols=Volunteer.find(vols)
+	@vol_info=@arvols.map{|i| [i.id, i.name, @assigned[i.id]||0, i.signups.last.early, i.restrictions]}
 	@droplist=@arvols.map{|i| [i.name, i.id]}
   end
   
@@ -331,6 +332,7 @@ def assign
 		worker.do_work()
 	end
 	session[:taskData]=nil
+	# need to reload the page here
 	redirect_to :action => 'assign', :id => sh.schedule.id, :vol=> vol
    end
    # post /schedules/do_jswork request comes from javascript buttons.js when

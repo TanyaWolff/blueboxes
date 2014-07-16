@@ -11,7 +11,7 @@
 <tr><td>Hat Area</td><td> <%=area_choices("volunteer") %></td>
 </tr>
   <p>
-    <%= f.label :key %> <%= f.check_box :key %> <%= f.label :hat %> <%= f.check_box :hat %>
+    <%= f.label :key %> <%= f.check_box :key %> <%= f.label :hat %> <%= f.check_box :hat %> Thursday List <%= f.check_box :early_entry, :checked=>thursday_list(@volunteer) %> 
   </p>
 <table>
 <tr><td>Password</td><td><%= f.text_field :password %></td></tr>
@@ -76,16 +76,6 @@
 <tr class="list-line-even"><td>Monday Morning</td>		<td><%= f.check_box :monday_am %></td></tr>
 <tr class="list-line-odd"><td>Monday Afternoon</td>		<td><%= f.check_box :monday_pm %></td></tr>
 
-</table>
-</td></tr>
-
-<tr><td>Audacity</td>
-<td><table class="inner">
-
-<tr class="list-line-odd"><td>Busy Gate</td>		<td><%= f.check_box :gate %></td></tr>
-<tr class="list-line-even"><td>Busy Inner</td>		<td><%= f.check_box :inner %></td></tr>
-
-</table>
 </td></tr>
 </table>
 
