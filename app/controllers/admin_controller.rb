@@ -27,11 +27,8 @@ class AdminController < ApplicationController
       redirect_to(:controller=>'admin',:action=>'login')
   end
  def bkup
-	 @d= Date.today.to_s
-      @db_bs=@d + "blueskies.sqlite3"
-      @db_camp=@d + "camp.sqlite3"
-      @db_wed=@d + "wedding.sqlite3"
-      @result=%x[bkup.bat #{@db_bs} #{@db_camp} #{@db_wed}]
+ 	@d= Date.today.to_s
+      @result=%x[./bkup.sh]
   end
 
  def stats
