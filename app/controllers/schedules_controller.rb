@@ -296,7 +296,7 @@ def assign
 	taskData = request.body.read
 	puts "In controller do_jswork: post data: "+taskData
 	vol=session[:update_vol]
-	worker=Worker.new(@id,vol)
+	worker=Worker.new(@id,session[:volunteer_id])
 	worker.tasks=taskData
 	if worker.tasks.nil? 
 		puts "In controller do_jswork action, but there's nothing to do"
