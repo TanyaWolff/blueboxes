@@ -1,8 +1,8 @@
 <div id="schedule">
-<h1> <%=h @schedule.title %> / <%=h status(@schedule.status) %> / Shifts assigned: <%=h @n_assigned %> <span class="buttons" ><%= button_to 'Assign Shifts', url_for(:action=> 'assign', :id=>@schedule.id), :method=>'get' if @schedule.status!=2 %></span></h1>
+<h1> <%=h @schedule.title %> / <%=h status(@schedule.status) %> / Shifts assigned: <%=h @n_assigned %> <span class="buttons" ><%= button_to 'Assign Shifts', url_for(:action=> 'assign', :id=>@schedule.id), :method => 'get' if @schedule.status!=2 %></span></h1>
 
-<h3> Key view / Each row shows a key volunteer's shifts. <span class="buttons"><%= button_to 'Print', :controller => :schedules, :action => :print, :id => @schedule.id %>
-<%= button_to 'Save', :controller => :schedules, :action => :save, :id => 2 %></span>
+<h3> Key view / Each row shows a key volunteer's shifts. <span class="buttons"><%= button_to 'Print', url_for(:action => :print, :id => @schedule.id), :method => 'get'%>
+<%= button_to 'Save', url_for(:action => :save, :id => @schedule.id), :method => 'get' %></span>
 </h3>
 <p>  
   <%=h @schedule.description %>

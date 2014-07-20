@@ -11,7 +11,7 @@
 		<tr class="<%=cycle('list-line-even','list-line-odd')%>"> <th style="background-color: lightgreen;" ><%= shift_hours[t][0].start.strftime("%I %p")%></th>
 		<% shift_hours[t].each do |loc|%>
 		          <% name=' ' %>
-			  <% name=loc.volunteer.name if loc.volunteer%>
+			  <% name=loc.volunteer.name if !loc.volunteer.nil?%>
 			<td><span class="sched-form-button" ><%= name%></span></td>
      
      

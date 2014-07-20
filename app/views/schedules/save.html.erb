@@ -5,7 +5,7 @@
  
   <% @ppl_sh_s.each do |k|  %>
  <% if k!=nil%>
- <tr class="<%=cycle('list-line-even','list-line-odd')%>"> <%=vol_row(@ppl_sh[k],@tms)%></tr>
+ <tr class="<%=cycle('list-line-even','list-line-odd')%>"> <%=vol_row(k,@ppl_sh[k],@tms)%></tr>
  <% end %>
 <% end %>
  

@@ -1,19 +1,27 @@
 $(document).ready(function(){
  console.log('buttons ready');
 })
-function doFunction(sched, shift, volunteer) {
+function doFunction(sched, shift, volunteer, label) {
      	el="#button"+shift;
-	b=$(el).html
-	console.log('button says '+b);
-	if (b == volunteer) {
+	console.log('button says '+label);
+	if (label == volunteer) {
      		console.log('unsetting '+volunteer+ ' at '+el);
         	$(el).html('');
+		$(el).css( "background","pink")
+		act='D';
+	} else if (label != '') {
+     		console.log('changing '+label+' to '+volunteer+ ' at '+el);
+        	$(el).html(volunteer);
+		$(el).css( "background","#A9A9F5")
+		act='M'
 	} else {
      		console.log('setting '+volunteer+ ' at '+el);
         	$(el).html(volunteer);
+		$(el).css( "background","lightblue")
+		act='A'
 	}
 
-     	list=$('#mylist').html()+'<br/>['+shift+', '+volunteer+']'
+     	list=$('#mylist').html()+'['+act+shift+', '+volunteer+']'
 	console.log('creating list string '+list);
 	
 	
@@ -24,7 +32,6 @@ function doFunction(sched, shift, volunteer) {
 	if (jsonData == null) {
 		jsonData={"schedule": sched, "tasks": []};
 	} 
-	//alert("session "+JSON.stringify(jsonData));
 	var task = {
 	  "volunteer": volunteer,
 	  "shift": shift
@@ -36,7 +43,8 @@ function doFunction(sched, shift, volunteer) {
 	//sessionStorage.setItem("taskData", jsonData);
 	sessionStorage.setItem("taskData", taskstr);
 
-        $('#mylist').html(taskstr);
+        //$('#mylist').html(taskstr);
+     	$('#mylist').html(list);
 	console.log('creating html string from json data'+taskstr);
 }
 
@@ -68,8 +76,41 @@ function do_jswork() {
 	  type: 'POST',
 	  data: taskstr, 
 	  success: function(data,status){
-		sessionStorage.removeItem("taskData")
-    		alert("Post returned status: " + status + " and then we cleared session storage. Please refresh page.");
+		sessionStorage.removeItem("taskData");
+    		//alert("Post returned status: " + status + " and then we cleared session storage. Please refresh page.");
+	  }
+	});
+}
+function cancel_jswork() {
+	taskstr=sessionStorage.getItem("taskData")
+	if (taskstr == null) {
+		alert("No tasks in session to cancel");
+		return;
+	} 
+	jsonData=JSON.parse(taskstr);
+	if (jsonData.tasks == null) {
+		alert("Nothing to cancel");
+		return;
+	} 
+	sched=jsonData.schedule;
+ 	jsonData={"schedule": sched, "tasks": []};
+	taskstr=JSON.stringify(jsonData);
+	sessionStorage.removeItem("taskData");
+	console.log("js cancel_jswork ");
+	meta=$('meta[name="csrf-token"]').attr('content');
+	console.log("js meta: "+meta);
+	$.ajaxSetup({
+	  headers: {
+	    'X-CSRF-Token': meta
+	  }
+	});
+	console.log("ajax is setup");
+	url="/schedules/do_jswork/"+sched;
+	$.ajax({url: url,
+	  type: 'POST',
+	  data: taskstr, 
+	  success: function(data,status){
+    		//alert("Post returned status: " + status);
 	  }
 	});
 }

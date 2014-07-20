@@ -1,5 +1,6 @@
 Blueboxes::Application.routes.draw do
 
+  root :to => 'admin#index'
   resources :comments
   resources :signups
   resources :pictures
@@ -45,7 +46,6 @@ Blueboxes::Application.routes.draw do
   #map.connect "home/assign/:schedule", :controller => 'home', :action => 'assign'
   #map.connect "gate/duties", :controller => 'gate', :action => 'duties'
 
-  root :to => 'areas#index'
 
   # See how all your routes lay out with "rake routes"
 
