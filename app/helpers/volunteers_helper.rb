@@ -31,6 +31,20 @@ def loc_disp(i)
 	return 0 if i.nil?
 	Location.find(i).name
 end
+# display active record list as "Name1 <email1>","Name2 <email2>",
+def display_emails(list) 
+  	content_tag(:table, align: "center") do
+  	content_tag(:tr) do
+  	content_tag(:td) do
+  	content_tag(:ul, class: "nobullets") do
+                list.each do |n|
+                        concat content_tag(:li,"#{n.name} <#{n.email}>,")
+                end
+	end
+	end
+        end
+	end
+end
 def time_disp(i)
 	result=case i
 		when 0 then image_tag("happy.png")

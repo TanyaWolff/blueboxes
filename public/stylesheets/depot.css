@@ -925,3 +925,20 @@ span.buttons {
 	align: center;
 	color: white;
 	}
+.poem {
+	float: right;
+	margin-right:100px;
+	width: 200px;
+	vertical-align: top;
+	border: 10px outset pink;
+	color: white;
+	background-color: purple;
+	padding: 30px;
+	}
+
+ul.nobullets {
+	list-style-type: none;
+	text-align: center;
+    	border: 5px outset pink;
+	width: 250px;
+}

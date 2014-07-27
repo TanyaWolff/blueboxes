@@ -25,14 +25,14 @@ class VolunteersController < ApplicationController
   def email
 	@emails='nobody here'
 	if session[:area]
-	s=Schedule.where(area_id: session[:area]).last
-		if s
-		@emails=s.shifts.where('volunteer_id').uniq.map{|s| s.volunteer.email} - [""]
-		else
-		@emails=Volunteer.where(area_id: session[:area]).map{|v| v.email} - [""]
-		end
+	  year = Date.today.year.to_s
+	  @emails=Volunteer.joins(:signups).where(:signups => {:year=>year},:area_id=>session[:area]).select("name,email").order("name")
+	  if @emails.empty?
+		flash[:notice] = "Email list is empty. Check that volunteers have signed up for "+year+" in their profile page."
+	  end
 	else
-	@emails=Volunteer.all.map{|v| v.email} - [""]
+	  flash[:notice] = "Please choose a domain to collect emails for volunteers in that domain, then select the emails menu item again." 
+          redirect_to url_for(:controller => 'admin', :action=>'index')
 	end
   end
  
